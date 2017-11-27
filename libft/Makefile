@@ -6,7 +6,7 @@
 #    By: clegirar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 08:52:25 by clegirar          #+#    #+#              #
-#    Updated: 2017/11/25 13:15:49 by clegirar         ###   ########.fr        #
+#    Updated: 2017/11/27 12:40:13 by clegirar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,9 @@ SRCS	=	ft_atoi.c				\
 			ft_tabdel.c				\
 			ft_tabdup.c				\
 			ft_tablen.c				\
-			ft_puttab_int.c
+			ft_puttab_int.c			\
+			ft_tablen_int.c			\
+			ft_intlen.c
 
 CC		=	gcc
 

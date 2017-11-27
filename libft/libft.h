@@ -6,7 +6,7 @@
 /*   By: clegirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 08:52:16 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/25 12:45:33 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/27 12:39:57 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_intlen(int *str);
+int					ft_tablen_int(int **tab);
 int					ft_tablen(char **tab);
 char				**ft_tabdup(char **tab);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);

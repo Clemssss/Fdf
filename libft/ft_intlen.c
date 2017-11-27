@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   intlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clegirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 08:47:18 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/27 12:34:41 by clegirar         ###   ########.fr       */
+/*   Created: 2017/11/27 12:40:19 by clegirar          #+#    #+#             */
+/*   Updated: 2017/11/27 12:40:53 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_memalloc(size_t size)
+int		ft_intlen(int *str)
 {
-	void	*ap;
+	int	i;
 
-	if (size <= 0)
-		return (NULL);
-	ap = NULL;
-	if ((ap = malloc((size))) == NULL)
-		return (NULL);
-	ft_bzero(ap, size);
-	return (ap);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

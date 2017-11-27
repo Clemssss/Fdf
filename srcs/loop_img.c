@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:10 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/26 18:21:50 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/27 20:50:09 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,47 @@
 #include "libft.h"
 #include "fdf.h"
 
-static	int		fct_out(int keycode, void *param)
+static	int 	clear_pixels(t_struct *strct)
 {
-	t_window	*win;
+	int	x;
+	int	y;
 
-	win = (t_window *)param;
+	x = 0;
+	while (x < strct->win->width)
+	{
+		y = 0;
+		while (y < strct->win->height)
+		{
+			strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8] = 0;
+		  strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8 + 1] = 0;
+		  strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8 + 2] = 0;
+			y++;
+		}
+		x++;
+	}
+	return (0);
+}
+
+static	int		fct_key(int keycode, void *param)
+{
+	(void)param;
 	if (keycode == 53)
 		exit(0);
+	return (0);
+}
+
+static	int		fct_mouse(int keycode, int x, int y, t_struct *strct)
+{
+	if (keycode == 4 && strct->pos_win->pas >= 2)
+	{
+		//dprintf(1, "here = 4\n");
+		strct->pos_win->pas = strct->pos_win->pas - 1;
+	}
+	else if (keycode == 5)
+	{
+		//dprintf(1, "here = 5\n");
+		strct->pos_win->pas = strct->pos_win->pas + 1;
+	}
 	return (0);
 }
 
@@ -35,19 +69,23 @@ static	void 	my_pixel(t_pict *pict, int x, int y)
   g = (pict->img_color & 0xFF00) >> 8;
   b = (pict->img_color & 0xFF);
 
-  pict->data[y * pict->size_line + x * 4] = b;
-  pict->data[y * pict->size_line + x * 4 + 1] = g;
-  pict->data[y * pict->size_line + x * 4 + 2] = r;
+  pict->data[y * pict->size_line + x * pict->bpp / 8] = b;
+  pict->data[y * pict->size_line + x * pict->bpp / 8 + 1] = g;
+  pict->data[y * pict->size_line + x * pict->bpp / 8 + 2] = r;
 }
 
-static	void 	test(int x1, int y1, int x2, int y2, t_pict *pict)
+static	void 	test(t_struct *strct)
 {
 	int		x;
 
-	x = x1;
-	while (x <= x2)
+	x = strct->pos_iso->xmin;
+	while (x <= strct->pos_iso->xmax)
 	{
-		my_pixel(pict, x, y1 + ((y2 - y1) * (x - x1)) / (x2 - x1));
+		my_pixel(strct->pict, x,
+			strct->pos_iso->ymin +
+			((strct->pos_iso->ymax - strct->pos_iso->ymin)
+			* (x - strct->pos_iso->xmin))
+			/ (strct->pos_iso->xmax - strct->pos_iso->xmin));
 		x++;
 	}
 }
@@ -72,49 +110,90 @@ static	int		nb_digit(char *tab)
 	return (nb);
 }
 
-static	void 	pos_iso(int i, int j, int alt, int *outx, int *outy)
+static	void 	pos_iso(t_struct *strct)
 {
-	int startx;
-	int	starty;
-  int pas;
+	strct->pos_iso->xmin = strct->pos_win->startx
+	+ strct->coor->imin * strct->pos_win->pas
+	+ strct->coor->jmin * strct->pos_win->pas;
 
-	pas = 20;
-  startx = 200;
- 	starty = 200;
-  *outx = startx + i * pas + j * pas;
-  *outy = starty + i * pas / 2 - j * pas / 2 - alt;
+	strct->pos_iso->ymin = strct->pos_win->starty
+	+ strct->coor->imin * strct->pos_win->pas / strct->pos_win->inclix
+	- strct->coor->jmin * strct->pos_win->pas / strct->pos_win->incliy
+	- strct->coor->altmin * strct->pos_win->mult_alt;
+
+	strct->pos_iso->xmax = strct->pos_win->startx
+	+ strct->coor->imax * strct->pos_win->pas
+	+ strct->coor->jmax * strct->pos_win->pas;
+
+	strct->pos_iso->ymax = strct->pos_win->starty
+	+ strct->coor->imax * strct->pos_win->pas / strct->pos_win->inclix
+	- strct->coor->jmax * strct->pos_win->pas / strct->pos_win->incliy
+	- strct->coor->altmax * strct->pos_win->mult_alt;
 }
 
-static	int		get_alt(int i, int j)
+static	void 	segment(t_struct *strct)
 {
-    return (int)(15*cos(i*1.0/3)+15*sin(j*1.0/3));
+	pos_iso(strct);
+	test(strct);
 }
 
-static	void 	segment(t_pict *pict, int imin, int jmin, int imax, int jmax)
+static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
 {
-	int		xmin;
-	int		ymin;
-	int		xmax;
-	int		ymax;
-
-	pos_iso(imin, jmin, get_alt(imin, jmin), &xmin, &ymin);
-	pos_iso(imax, jmax, get_alt(imax, jmax), &xmax, &ymax);
-	test(xmin, ymin, xmax, ymax, pict);
+	if (tab[x][y] == 48)
+		strct->coor->altmin = 0;
+	else
+		strct->coor->altmin = tab[x][y];
+	if (tab[x][y + 1] == 48)
+		strct->coor->altmax = 0;
+	else
+		strct->coor->altmax = tab[x][y + 1];
+	strct->coor->imin = x;
+	strct->coor->jmin = y;
+	strct->coor->imax = x;
+	strct->coor->jmax = y + 1;
 }
 
-static	int		ft_put_pxl(t_pict *pict, char **tab)
+static	void 	remp_strct_x(t_struct *strct, int **tab, int x, int y)
+{
+	if (tab[x][y] == 48)
+		strct->coor->altmin = 0;
+	else
+		strct->coor->altmin = tab[x][y];
+	if (tab[x + 1][y] == 48)
+		strct->coor->altmax = 0;
+	else
+		strct->coor->altmax = tab[x + 1][y];
+	strct->coor->imin = x;
+	strct->coor->jmin = y;
+	strct->coor->imax = x + 1;
+	strct->coor->jmax = y;
+}
+
+static	int		ft_put_pxl(t_struct *strct)
 {
 	int		x;
 	int		y;
+	int		il;
+	int		tl;
 
 	x = 0;
-	while (x < ft_tablen(tab))
+	tl = ft_tablen_int(strct->win->coor);
+	while (strct->win->coor[x])
 	{
 		y = 0;
-		while (y < nb_digit(tab[x]))
+		il = ft_intlen(strct->win->coor[x]);
+		while (strct->win->coor[x][y])
 		{
-			segment(pict, y, x, y + 1, x);
-			segment(pict, y, x, y, x + 1);
+			if (y < il - 1)
+			{
+				remp_strct_y(strct, strct->win->coor, x, y);
+				segment(strct);
+			}
+			if (x < tl - 1 && y < ft_intlen(strct->win->coor[x + 1]))
+			{
+				remp_strct_x(strct, strct->win->coor, x, y);
+				segment(strct);
+			}
 			y++;
 		}
 		x++;
@@ -122,26 +201,30 @@ static	int		ft_put_pxl(t_pict *pict, char **tab)
 	return (0);
 }
 
-int						loop_img(t_window *win)
+int						loop_img(t_struct *strct)
 {
-	t_pict		*pict;
-
-	if ((!(pict = (t_pict *)ft_memalloc(sizeof(t_pict))))
-			|| (!(win->mlx = mlx_init())))
+	if (!(strct->win->mlx = mlx_init()))
 		return (-1);
-	win->width = 800;
-	win->height = 800;
-	win->name = "Fdf";
-	pict->x = win->width;
-	pict->y = win->height;
-	if ((!(win->window = mlx_new_window(win->mlx, win->width, win->height, win->name)))
-			|| (!(pict->img = mlx_new_image(win->mlx, pict->x, pict->y)))
-			|| (!(pict->data = mlx_get_data_addr(pict->img, &pict->bpp, &pict->size_line, &pict->endian))))
+	strct->win->width = 1800;
+	strct->win->height = 1800;
+	strct->win->name = "Fdf";
+	strct->pict->x = strct->win->width;
+	strct->pict->y = strct->win->height;
+	if ((!(strct->win->window = mlx_new_window(strct->win->mlx,
+		strct->win->width, strct->win->height, strct->win->name)))
+			|| (!(strct->pict->img = mlx_new_image(strct->win->mlx,
+				strct->pict->x, strct->pict->y)))
+			|| (!(strct->pict->data = mlx_get_data_addr(strct->pict->img,
+				&strct->pict->bpp, &strct->pict->size_line, &strct->pict->endian))))
 		return (-1);
-	pict->img_color = mlx_get_color_value(win->mlx, 0xF00ED1);
-	mlx_key_hook(win->window, fct_out, win);
-	ft_put_pxl(pict, win->tab);
-	mlx_put_image_to_window(win->mlx, win->window, pict->img, 0, 0);
-	mlx_loop(win->mlx);
+	strct->pict->img_color = mlx_get_color_value(strct->win->mlx, 0xFFFFFF);
+	strct->win->coor = change_tab(strct->win->tab);
+	ft_puttab_int(strct->win->coor);
+	ft_put_pxl(strct);
+	mlx_key_hook(strct->win->window, &fct_key, NULL);
+	mlx_mouse_hook(strct->win->window, &fct_mouse, strct);
+	mlx_put_image_to_window(strct->win->mlx,
+		strct->win->window, strct->pict->img, 0, 0);
+	mlx_loop(strct->win->mlx);
 	return (0);
 }

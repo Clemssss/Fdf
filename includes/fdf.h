@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/26 16:27:20 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/27 20:16:38 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct  s_window
   void          *mlx;
   void          *window;
   char          **tab;
+  int           **coor;
 }               t_window;
 
 typedef struct  s_pict
@@ -45,9 +46,44 @@ typedef struct  s_pict
   int           y;
 }               t_pict;
 
-int             loop_img(t_window *win);
-void 	          del_window(t_window **win);
-void 	          del_pict(t_pict **pict);
-int             **ft_strsplit_int(char *tmp, char c);
+typedef struct  s_coor
+{
+  int           altmin;
+  int           altmax;
+  int           imin;
+  int           jmin;
+  int           imax;
+  int           jmax;
+}               t_coor;
+
+typedef struct  s_pos_iso
+{
+  int           xmin;
+  int           ymin;
+  int           xmax;
+  int           ymax;
+}               t_pos_iso;
+
+typedef struct  s_pos_win
+{
+  int           startx;
+  int           starty;
+  float         pas;
+  float         inclix;
+  float         incliy;
+  float         mult_alt;
+}               t_pos_win;
+
+typedef struct  s_struct
+{
+  t_window      *win;
+  t_pict        *pict;
+  t_coor        *coor;
+  t_pos_iso     *pos_iso;
+  t_pos_win     *pos_win;
+}               t_struct;
+
+int             loop_img(t_struct *strct);
+int             **change_tab(char **tab);
 
 #endif

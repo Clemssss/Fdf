@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/25 18:34:18 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/27 19:22:10 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,33 @@ static	char	*read_and_fill(char **av)
 	return (tmp);
 }
 
+static	void 	init_strct(t_struct *strct)
+{
+	strct->pos_win->startx = 300;
+	strct->pos_win->starty = 700;
+	strct->pos_win->pas = 50;
+	strct->pos_win->inclix = 1.2;
+	strct->pos_win->incliy = 1.7;
+	strct->pos_win->mult_alt = 16;
+}
+
 int						main(int ac, char **av)
 {
-	t_window	*win;
+	t_struct	*strct;
 	char			*tmp;
 
 	(void)ac;
 	if ((!(tmp = read_and_fill(av)))
-			|| (!(win = (t_window *)ft_memalloc(sizeof(t_window))))
-			|| (!(win->tab = ft_strsplit(tmp, '\n'))))
+			|| (!(strct = (t_struct *)ft_memalloc(sizeof(t_struct))))
+			|| (!(strct->win = (t_window *)ft_memalloc(sizeof(t_window))))
+			|| (!(strct->pict = (t_pict *)ft_memalloc(sizeof(t_pict))))
+			|| (!(strct->coor = (t_coor *)ft_memalloc(sizeof(t_coor))))
+			|| (!(strct->pos_iso = (t_pos_iso *)ft_memalloc(sizeof(t_pos_iso))))
+			|| (!(strct->pos_win = (t_pos_win *)ft_memalloc(sizeof(t_pos_win))))
+			|| (!(strct->win->tab = ft_strsplit(tmp, '\n'))))
 		return (-1);
 	ft_strdel(&tmp);
-	ft_puttab(win->tab, 1);
-	loop_img(win);
+	init_strct(strct);
+	loop_img(strct);
 	return (0);
 }
