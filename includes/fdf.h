@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/27 20:16:38 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/28 15:42:59 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct  s_pos_win
   float         inclix;
   float         incliy;
   float         mult_alt;
+  int           key[269];
 }               t_pos_win;
 
 typedef struct  s_struct
@@ -85,5 +86,7 @@ typedef struct  s_struct
 
 int             loop_img(t_struct *strct);
 int             **change_tab(char **tab);
+void            set_0(int *key);
+void			free_strct(t_struct *strct);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:10 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/27 20:50:09 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/28 15:53:33 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,30 @@ static	int 	clear_pixels(t_struct *strct)
 	int	x;
 	int	y;
 
-	x = 0;
-	while (x < strct->win->width)
+	y = 0;
+	while (y < strct->win->width)
 	{
-		y = 0;
-		while (y < strct->win->height)
+		x = 0;
+		while (x < strct->win->height)
 		{
 			strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8] = 0;
 		  strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8 + 1] = 0;
 		  strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8 + 2] = 0;
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	return (0);
 }
 
-static	int		fct_key(int keycode, void *param)
+static	int		fct_key(int keycode, t_struct *strct)
 {
-	(void)param;
 	if (keycode == 53)
 		exit(0);
-	return (0);
-}
-
-static	int		fct_mouse(int keycode, int x, int y, t_struct *strct)
-{
-	if (keycode == 4 && strct->pos_win->pas >= 2)
+	if (keycode)
 	{
-		//dprintf(1, "here = 4\n");
-		strct->pos_win->pas = strct->pos_win->pas - 1;
-	}
-	else if (keycode == 5)
-	{
-		//dprintf(1, "here = 5\n");
-		strct->pos_win->pas = strct->pos_win->pas + 1;
+		dprintf(1, "keycode = %d\n", keycode);
+		strct->pos_win->key[keycode] = 1;
 	}
 	return (0);
 }
@@ -74,19 +63,47 @@ static	void 	my_pixel(t_pict *pict, int x, int y)
   pict->data[y * pict->size_line + x * pict->bpp / 8 + 2] = r;
 }
 
-static	void 	test(t_struct *strct)
+void line(t_pict *pict, int xi,int yi,int xf,int yf)
 {
-	int		x;
-
-	x = strct->pos_iso->xmin;
-	while (x <= strct->pos_iso->xmax)
+  int dx,dy,i,xinc,yinc,cumul,x,y ;
+  x = xi ;
+  y = yi ;
+  dx = xf - xi ;
+  dy = yf - yi ;
+  xinc = ( dx > 0 ) ? 1 : -1 ;
+  yinc = ( dy > 0 ) ? 1 : -1 ;
+  dx = ABS(dx) ;
+  dy = ABS(dy) ;
+	my_pixel(pict, x, y);
+  if ( dx > dy )
 	{
-		my_pixel(strct->pict, x,
-			strct->pos_iso->ymin +
-			((strct->pos_iso->ymax - strct->pos_iso->ymin)
-			* (x - strct->pos_iso->xmin))
-			/ (strct->pos_iso->xmax - strct->pos_iso->xmin));
-		x++;
+    cumul = dx / 2 ;
+    for ( i = 1 ; i <= dx ; i++ )
+		{
+      x += xinc ;
+      cumul += dy ;
+      if ( cumul >= dx )
+			{
+        cumul -= dx ;
+        y += yinc ;
+			}
+			my_pixel(pict, x, y);
+		}
+	}
+  else
+	{
+    cumul = dy / 2 ;
+  	for ( i = 1 ; i <= dy ; i++ )
+		{
+			y += yinc ;
+    	cumul += dx ;
+      if ( cumul >= dy )
+			{
+      	cumul -= dy ;
+      	x += xinc ;
+			}
+			my_pixel(pict, x, y);
+		}
 	}
 }
 
@@ -134,7 +151,7 @@ static	void 	pos_iso(t_struct *strct)
 static	void 	segment(t_struct *strct)
 {
 	pos_iso(strct);
-	test(strct);
+	line(strct->pict, strct->pos_iso->xmin, strct->pos_iso->ymin, strct->pos_iso->xmax, strct->pos_iso->ymax);
 }
 
 static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
@@ -201,6 +218,52 @@ static	int		ft_put_pxl(t_struct *strct)
 	return (0);
 }
 
+void 	set_0(int *key)
+{
+	int 	i;
+
+	i = 0;
+	while (key[i])
+		key[i] = 0;
+}
+
+static	void 	zoom(t_struct *strct)
+{
+	if (strct->pos_win->key[126])
+		strct->pos_win->mult_alt += 1;
+	if (strct->pos_win->key[125])
+		strct->pos_win->mult_alt -= 1;
+	if (strct->pos_win->key[12])
+		strct->pos_win->startx -= 5;
+	if (strct->pos_win->key[13])
+		strct->pos_win->startx += 5;
+	if (strct->pos_win->key[14] && strct->pos_win->starty > 295)
+		strct->pos_win->starty -= 5;
+	if (strct->pos_win->key[15])
+		strct->pos_win->starty += 5;
+	if (strct->pos_win->key[69] && strct->pos_win->mult_alt < 57)
+		strct->pos_win->pas += 1;
+	if (strct->pos_win->key[78])
+		strct->pos_win->pas -= 1;
+}
+
+static	int 	test(t_struct *strct)
+{
+	clear_pixels(strct);
+	zoom(strct);
+	ft_put_pxl(strct);
+	mlx_put_image_to_window(strct->win->mlx,
+		strct->win->window, strct->pict->img, 0, 0);
+	return (0);
+}
+
+static	int 	key_off(int keycode, t_struct *strct)
+{
+	if (keycode)
+		strct->pos_win->key[keycode] = 0;
+	return (0);
+}
+
 int						loop_img(t_struct *strct)
 {
 	if (!(strct->win->mlx = mlx_init()))
@@ -221,10 +284,10 @@ int						loop_img(t_struct *strct)
 	strct->win->coor = change_tab(strct->win->tab);
 	ft_puttab_int(strct->win->coor);
 	ft_put_pxl(strct);
-	mlx_key_hook(strct->win->window, &fct_key, NULL);
-	mlx_mouse_hook(strct->win->window, &fct_mouse, strct);
-	mlx_put_image_to_window(strct->win->mlx,
-		strct->win->window, strct->pict->img, 0, 0);
+	mlx_hook(strct->win->window, 2, 0, &fct_key, strct);
+	mlx_loop_hook(strct->win->mlx, &test, strct);
+	mlx_key_hook(strct->win->window, &key_off, strct);
 	mlx_loop(strct->win->mlx);
+	free_strct(strct);
 	return (0);
 }
