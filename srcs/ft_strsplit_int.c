@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:11:24 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 11:23:56 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:58:59 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static	int		size_dig(char *tab, int i, char c)
 	nb = 0;
 	while (tab[i] && tab[i] != c)
 	{
-		if (ft_isdigit(tab[i]))
+		if (ft_isdigit(tab[i]) || tab[i] == '-' || tab[i] == '+')
 		{
 			nb++;
-			while (ft_isdigit(tab[i]))
+			while (ft_isdigit(tab[i]) || tab[i] == '-' || tab[i] == '+')
 				i++;
 		}
 		else
@@ -68,13 +68,13 @@ int						**ft_strsplit_int(char *tab, char c)
 				return (NULL);
 			while (tab[i] && tab[i] != c)
 			{
-				if (ft_isdigit(tab[i]))
+				if (ft_isdigit(tab[i]) || tab[i] == '-' || tab[i] == '+')
 				{
 					if (tab[i] == '0')
 						ret[x][y++] = '0';
 					else
 						ret[x][y++] = ft_atoi(&tab[i]);
-					while (ft_isdigit(tab[i]))
+					while (ft_isdigit(tab[i]) || tab[i] == '-' || tab[i] == '+')
 						i++;
 				}
 				else

@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:42:59 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 12:23:46 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 19:24:38 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static  void  draw_x(t_struct *strct, t_line line)
   int   cumul;
 
   cumul = line.diff_x / 2;
-  i = 1;
-  while (i <= line.diff_x)
+  i = 0;
+  while (i < line.diff_x)
   {
     line.x += line.x_incr;
     cumul += line.diff_y;
@@ -28,7 +28,16 @@ static  void  draw_x(t_struct *strct, t_line line)
       cumul -= line.diff_x;
       line.y += line.y_incr;
     }
-    draw_pixel(strct->pict, line.x, line.y, 0xFFFFFF);
+    if ((line.x >= 0 && line.x < 1800)
+      && (line.y >= 1 && line.y < 1800))
+      {
+        if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
+          draw_pixel(strct->pict, line.x, line.y, 0xF20A0A); //rouge
+        else if (strct->coor->alt < 0 || strct->coor->alt2 < 0)
+          draw_pixel(strct->pict, line.x, line.y, 0x1BABF4); //bleu
+        else if (strct->coor->alt == 0 || strct->coor->alt2 == 0)
+          draw_pixel(strct->pict, line.x, line.y, strct->coor->color);
+      }
     i++;
   }
 }
@@ -39,8 +48,8 @@ static  void  draw_y(t_struct *strct, t_line line)
   int   cumul;
 
   cumul = line.diff_y / 2;
-  i = 1;
-  while (i <= line.diff_y)
+  i = 0;
+  while (i < line.diff_y)
   {
     line.y += line.y_incr;
     cumul += line.diff_x;
@@ -49,12 +58,21 @@ static  void  draw_y(t_struct *strct, t_line line)
       cumul -= line.diff_y;
       line.x += line.x_incr;
     }
-    draw_pixel(strct->pict, line.x, line.y, 0xFFFFFF);
+    if ((line.x >= 0 && line.x < 1800)
+      && (line.y >= 1 && line.y < 1800))
+      {
+        if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
+          draw_pixel(strct->pict, line.x, line.y, 0xF20A0A); //rouge
+        else if (strct->coor->alt < 0 || strct->coor->alt2 < 0)
+          draw_pixel(strct->pict, line.x, line.y, 0x1BABF4); //bleu
+        else if (strct->coor->alt == 0 || strct->coor->alt2 == 0)
+          draw_pixel(strct->pict, line.x, line.y, strct->coor->color);
+      }
     i++;
   }
 }
 
-void draw_line(t_struct *strct)
+void           draw_line(t_struct *strct)
 {
   t_line  line;
 
@@ -66,9 +84,21 @@ void draw_line(t_struct *strct)
   line.y_incr = (line.diff_y > 0) ? 1 : -1;
   line.diff_x = ABS(line.diff_x);
   line.diff_y = ABS(line.diff_y);
-	draw_pixel(strct->pict, line.x, line.y, 0xFFFFFF);
-  if (line.diff_x > line.diff_y)
-    draw_x(strct, line);
-  else
-    draw_y(strct, line);
+  if ((line.x >= 0 && line.x < 1800)
+    && (line.y >= 1 && line.y < 1800))
+    {
+      if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
+        draw_pixel(strct->pict, line.x, line.y, 0xF20A0A); //rouge
+      else if (strct->coor->alt < 0 || strct->coor->alt2 < 0)
+        draw_pixel(strct->pict, line.x, line.y, 0x1BABF4); //bleu
+      else if (strct->coor->alt == 0 || strct->coor->alt2 == 0)
+        draw_pixel(strct->pict, line.x, line.y, strct->coor->color);
+    }
+  if (strct->choix->draw == 0)
+  {
+    if (line.diff_x > line.diff_y)
+      draw_x(strct, line);
+    else
+      draw_y(strct, line);
+  }
 }

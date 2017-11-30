@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 11:19:29 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 19:59:56 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ static	char	*read_and_fill(char **av)
 
 static	void 	init_strct(t_struct *strct)
 {
-	strct->pos_win->startx = 300;
-	strct->pos_win->starty = 700;
+	strct->pos_win->startx = 550;
+	strct->pos_win->starty = 750;
 	strct->pos_win->pas = 50;
 	strct->pos_win->inclix = 1.7;
 	strct->pos_win->incliy = 1.7;
 	strct->pos_win->mult_alt = 16;
+	strct->coor->color = 0xFFFFFF;
+	strct->choix->draw = 0;
 }
 
 int						main(int ac, char **av)
@@ -61,6 +63,7 @@ int						main(int ac, char **av)
 			|| (!(strct->coor = (t_coor *)ft_memalloc(sizeof(t_coor))))
 			|| (!(strct->pos_iso = (t_pos_iso *)ft_memalloc(sizeof(t_pos_iso))))
 			|| (!(strct->pos_win = (t_pos_win *)ft_memalloc(sizeof(t_pos_win))))
+			|| (!(strct->choix = (t_choix *)ft_memalloc(sizeof(t_choix))))
 			|| (!(strct->win->coor = ft_strsplit_int(tmp, '\n'))))
 		return (-1);
 	ft_strdel(&tmp);

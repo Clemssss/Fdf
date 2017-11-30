@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 11:53:15 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 19:59:51 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct  s_pict
 
 typedef struct  s_coor
 {
+  int           alt;
+  int           alt2;
+  unsigned  int color;
   int           altmin;
   int           altmax;
   int           imin;
@@ -70,6 +73,11 @@ typedef struct  s_pos_win
   int           key[269];
 }               t_pos_win;
 
+typedef struct  s_choix
+{
+  int           draw;
+}               t_choix;
+
 typedef struct  s_struct
 {
   t_window      *win;
@@ -77,6 +85,7 @@ typedef struct  s_struct
   t_coor        *coor;
   t_pos_iso     *pos_iso;
   t_pos_win     *pos_win;
+  t_choix       *choix;
 }               t_struct;
 
 /*  del_struct.c  */
@@ -86,6 +95,7 @@ void			      free_strct(t_struct *strct);
 int             do_change(t_struct *strct);
 
 /*  events.c  */
+int             choice(int keycode, t_struct *strct);
 int             fct_key(int keycode, t_struct *strct);
 int             fct_mouse(int button, int x, int y, t_struct *strct);
 int             key_off(int keycode, t_struct *strct);

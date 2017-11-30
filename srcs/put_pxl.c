@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 12:15:39 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 20:10:19 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,25 @@ static	void 	segment(t_struct *strct)
 static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
 {
 	if (tab[x][y] == 48)
+	{
+		strct->coor->alt = 0;
 		strct->coor->altmin = 0;
+	}
 	else
+	{
+		strct->coor->alt = tab[x][y] * strct->pos_win->mult_alt;
 		strct->coor->altmin = tab[x][y];
+	}
 	if (tab[x][y + 1] == 48)
+	{
+		strct->coor->alt2 = 0;
 		strct->coor->altmax = 0;
+	}
 	else
+	{
+		strct->coor->alt2 = tab[x][y + 1] * strct->pos_win->mult_alt;
 		strct->coor->altmax = tab[x][y + 1];
+	}
 	strct->coor->imin = x;
 	strct->coor->jmin = y;
 	strct->coor->imax = x;
@@ -39,13 +51,25 @@ static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
 static	void 	remp_strct_x(t_struct *strct, int **tab, int x, int y)
 {
 	if (tab[x][y] == 48)
+	{
+		strct->coor->alt = 0;
 		strct->coor->altmin = 0;
+	}
 	else
+	{
+		strct->coor->alt = tab[x][y] * strct->pos_win->mult_alt;
 		strct->coor->altmin = tab[x][y];
+	}
 	if (tab[x + 1][y] == 48)
+	{
+		strct->coor->alt2 = 0;
 		strct->coor->altmax = 0;
+	}
 	else
+	{
+		strct->coor->alt2 = tab[x + 1][y] * strct->pos_win->mult_alt;
 		strct->coor->altmax = tab[x + 1][y];
+	}
 	strct->coor->imin = x;
 	strct->coor->jmin = y;
 	strct->coor->imax = x + 1;

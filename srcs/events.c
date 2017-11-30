@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:14:37 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 11:23:11 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 19:21:14 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int		fct_key(int keycode, t_struct *strct)
 		free_strct(strct);
 		exit(0);
 	}
-	if (keycode)
+	if (keycode == 35)
+		strct->choix->draw = ((strct->choix->draw) == 0 ? 1 : 0);
+	if (keycode && keycode != 35)
 		strct->pos_win->key[keycode] = 1;
 	return (0);
 }
@@ -41,7 +43,7 @@ int		fct_mouse(int button, int x, int y, t_struct *strct)
 int 	key_off(int keycode, t_struct *strct)
 {
 	(void)strct;
-	if (keycode)
+	if (keycode && keycode != 35)
 		strct->pos_win->key[keycode] = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 12:28:32 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 20:06:35 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ static	void 	change_alt(t_struct *strct)
 		strct->pos_win->mult_alt += 1;
 	if (strct->pos_win->key[78])
 		strct->pos_win->mult_alt -= 1;
+	/*if (strct->pos_win->mult_alt > 30)
+		strct->pict->color = 0xE30707;
+	else if (strct->pos_win->mult_alt < 30)
+		strct->pict->color = 0xFFFFFF;*/
 }
 
 int 					do_change(t_struct *strct)
