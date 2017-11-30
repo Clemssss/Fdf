@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/28 15:42:59 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 10:47:38 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@
 
 typedef struct  s_window
 {
-  char          *name;
   int           width;
   int           height;
   void          *mlx;
   void          *window;
-  char          **tab;
   int           **coor;
 }               t_window;
 
@@ -41,7 +39,6 @@ typedef struct  s_pict
   int           bpp;
   int           size_line;
   int           endian;
-  unsigned  int img_color;
   int           x;
   int           y;
 }               t_pict;
@@ -85,8 +82,8 @@ typedef struct  s_struct
 }               t_struct;
 
 int             loop_img(t_struct *strct);
-int             **change_tab(char **tab);
+int             **change_tab(char *tab);
 void            set_0(int *key);
-void			free_strct(t_struct *strct);
+void			      free_strct(t_struct *strct);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/28 15:11:43 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 10:59:42 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ static	void 	init_strct(t_struct *strct)
 	strct->pos_win->startx = 300;
 	strct->pos_win->starty = 700;
 	strct->pos_win->pas = 50;
-	strct->pos_win->inclix = 1.2;
+	strct->pos_win->inclix = 1.7;
 	strct->pos_win->incliy = 1.7;
 	strct->pos_win->mult_alt = 16;
-	set_0(strct->pos_win->key);
 }
 
 int						main(int ac, char **av)
@@ -62,7 +61,7 @@ int						main(int ac, char **av)
 			|| (!(strct->coor = (t_coor *)ft_memalloc(sizeof(t_coor))))
 			|| (!(strct->pos_iso = (t_pos_iso *)ft_memalloc(sizeof(t_pos_iso))))
 			|| (!(strct->pos_win = (t_pos_win *)ft_memalloc(sizeof(t_pos_win))))
-			|| (!(strct->win->tab = ft_strsplit(tmp, '\n'))))
+			|| (!(strct->win->coor = change_tab(tmp))))
 		return (-1);
 	ft_strdel(&tmp);
 	init_strct(strct);
