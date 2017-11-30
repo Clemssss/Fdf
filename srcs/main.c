@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 10:59:42 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 11:19:29 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int						main(int ac, char **av)
 			|| (!(strct->coor = (t_coor *)ft_memalloc(sizeof(t_coor))))
 			|| (!(strct->pos_iso = (t_pos_iso *)ft_memalloc(sizeof(t_pos_iso))))
 			|| (!(strct->pos_win = (t_pos_win *)ft_memalloc(sizeof(t_pos_win))))
-			|| (!(strct->win->coor = change_tab(tmp))))
+			|| (!(strct->win->coor = ft_strsplit_int(tmp, '\n'))))
 		return (-1);
 	ft_strdel(&tmp);
 	init_strct(strct);

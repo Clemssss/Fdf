@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change_tab.c                                       :+:      :+:    :+:   */
+/*   ft_strsplit_int.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:11:24 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 10:57:15 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 11:23:56 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
 
-static	int		size_tab(char *tab)
+static	int		size_tab(char *tab, char c)
 {
 	int	i;
 	int	nb;
@@ -22,19 +22,19 @@ static	int		size_tab(char *tab)
 	nb = 0;
 	while (tab[i])
 	{
-		if (tab[i] == '\n')
+		if (tab[i] == c)
 			nb++;
 		i++;
 	}
 	return (nb);
 }
 
-static	int		size_dig(char *tab, int i)
+static	int		size_dig(char *tab, int i, char c)
 {
 	int	nb;
 
 	nb = 0;
-	while (tab[i] && tab[i] != '\n')
+	while (tab[i] && tab[i] != c)
 	{
 		if (ft_isdigit(tab[i]))
 		{
@@ -48,7 +48,7 @@ static	int		size_dig(char *tab, int i)
 	return (nb);
 }
 
-int		**change_tab(char *tab)
+int						**ft_strsplit_int(char *tab, char c)
 {
 	int	**ret;
 	int	i;
@@ -57,16 +57,16 @@ int		**change_tab(char *tab)
 
 	i = 0;
 	x = 0;
-	if(!(ret = (int **)ft_memalloc(sizeof(int *) * (size_tab(tab) + 1))))
+	if(!(ret = (int **)ft_memalloc(sizeof(int *) * (size_tab(tab, c) + 1))))
 		return (NULL);
 	while (tab[i])
 	{
-		if (tab[i] != '\n')
+		if (tab[i] != c)
 		{
 			y = 0;
-			if (!(ret[x] = (int *)ft_memalloc(sizeof(int) * (size_dig(tab, i) + 1))))
+			if (!(ret[x] = (int *)ft_memalloc(sizeof(int) * (size_dig(tab, i, c) + 1))))
 				return (NULL);
-			while (tab[i] && tab[i] != '\n')
+			while (tab[i] && tab[i] != c)
 			{
 				if (ft_isdigit(tab[i]))
 				{

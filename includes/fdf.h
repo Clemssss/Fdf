@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 10:47:38 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 11:53:15 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <sys/stat.h>
 # include <unistd.h>
 # include <math.h>
-
-# define ABS(Value) ((Value) < 0 ? - (Value) : (Value))
 
 typedef struct  s_window
 {
@@ -81,9 +79,29 @@ typedef struct  s_struct
   t_pos_win     *pos_win;
 }               t_struct;
 
-int             loop_img(t_struct *strct);
-int             **change_tab(char *tab);
-void            set_0(int *key);
+/*  del_struct.c  */
 void			      free_strct(t_struct *strct);
+
+/*  do_change */
+int             do_change(t_struct *strct);
+
+/*  events.c  */
+int             fct_key(int keycode, t_struct *strct);
+int             fct_mouse(int button, int x, int y, t_struct *strct);
+int             key_off(int keycode, t_struct *strct);
+
+/*  ft_strsplit_int.c */
+int             **ft_strsplit_int(char *tab, char c);
+
+/*  loop_img.c  */
+int             loop_img(t_struct *strct);
+void            line(t_pict *, int, int, int, int);
+void            clear_pixels(t_struct *);
+
+/*  pos.c */
+void            pos_iso(t_struct *);
+
+/*  put_pxl.c */
+int             ft_put_pxl(t_struct *strct);
 
 #endif
