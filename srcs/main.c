@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 19:59:56 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 21:18:36 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ static	void 	init_strct(t_struct *strct)
 	strct->pos_win->starty = 750;
 	strct->pos_win->pas = 50;
 	strct->pos_win->inclix = 1.7;
-	strct->pos_win->incliy = 1.7;
+	strct->pos_win->incliy = 2;
 	strct->pos_win->mult_alt = 16;
 	strct->coor->color = 0xFFFFFF;
 	strct->choix->draw = 0;
+	strct->pos_win->degre = 0;
 }
 
 int						main(int ac, char **av)

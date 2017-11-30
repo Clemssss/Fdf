@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 20:10:19 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 21:32:44 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,21 @@
 #include "fdf.h"
 #include "libmlx.h"
 
+static	void 	rotation(t_struct *strct)
+{
+	float	radian;
+
+	radian = strct->pos_win->degre * 3.141 * 180;
+	strct->pos_iso->xmin = strct->pos_iso->xmin * cos(radian) - strct->pos_iso->ymin * sin(radian);
+	strct->pos_iso->ymin = strct->pos_iso->xmin * sin(radian) + strct->pos_iso->ymin * cos(radian);
+	strct->pos_iso->xmax = strct->pos_iso->xmax * cos(radian) - strct->pos_iso->ymax * sin(radian);
+	strct->pos_iso->ymax = strct->pos_iso->xmax * sin(radian) + strct->pos_iso->ymax * cos(radian);
+}
+
 static	void 	segment(t_struct *strct)
 {
 	pos_iso(strct);
+	rotation(strct);
 	draw_line(strct);
 }
 

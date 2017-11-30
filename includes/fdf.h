@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 19:59:51 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 20:36:37 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct  s_pos_iso
 
 typedef struct  s_pos_win
 {
+  float         degre;
   int           startx;
   int           starty;
   float         pas;
