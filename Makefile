@@ -6,7 +6,7 @@
 #    By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/24 16:33:19 by clegirar          #+#    #+#              #
-#    Updated: 2017/11/30 11:52:28 by clegirar         ###   ########.fr        #
+#    Updated: 2017/11/30 12:24:15 by clegirar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS	=	$(SRCS:.c=.o)
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror -I./includes/ -I./libft/ -I./minilibx_macos/ -I./lib_mlx/includes/ -g3
+CFLAGS	=	-Wall -Wextra -Werror -I./includes/ -I./libft/ -I./minilibx_macos/ -I./lib_mlx/includes/
 
 all			:	$(NAME)
 

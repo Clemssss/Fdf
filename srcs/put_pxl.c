@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 11:45:28 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 12:15:39 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static	void 	segment(t_struct *strct)
 {
 	pos_iso(strct);
-	draw_line(strct->pict, strct->pos_iso->xmin, strct->pos_iso->ymin, strct->pos_iso->xmax, strct->pos_iso->ymax);
+	draw_line(strct);
 }
 
 static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)

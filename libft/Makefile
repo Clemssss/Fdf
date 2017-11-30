@@ -6,7 +6,7 @@
 #    By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 08:52:25 by clegirar          #+#    #+#              #
-#    Updated: 2017/11/30 11:36:07 by clegirar         ###   ########.fr        #
+#    Updated: 2017/11/30 12:24:21 by clegirar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ CC		=	gcc
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror -I./ -g3
+CFLAGS	=	-Wall -Wextra -Werror -I./
 
 all		:	$(NAME)
 

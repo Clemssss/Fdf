@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:42:24 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 11:42:46 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/11/30 12:00:57 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void 	clear_pixels(t_struct *strct)
 	int	y;
 
 	y = 0;
-	while (y < strct->win->width)
+	while (y < strct->pict->y)
 	{
 		x = 0;
-		while (x < strct->win->height)
+		while (x < strct->pict->x)
 		{
 			strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8] = 0;
 		  strct->pict->data[y * strct->pict->size_line + x * strct->pict->bpp / 8 + 1] = 0;
