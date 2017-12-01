@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 20:36:37 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/01 19:07:28 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct  s_window
   void          *mlx;
   void          *window;
   int           **coor;
+  int           tl;
+  int           il;
 }               t_window;
 
 typedef struct  s_pict
@@ -46,8 +48,6 @@ typedef struct  s_coor
   int           alt;
   int           alt2;
   unsigned  int color;
-  int           altmin;
-  int           altmax;
   int           imin;
   int           jmin;
   int           imax;
@@ -65,11 +65,11 @@ typedef struct  s_pos_iso
 typedef struct  s_pos_win
 {
   float         degre;
+  float         degre2;
+  float         degre3;
   int           startx;
   int           starty;
   float         pas;
-  float         inclix;
-  float         incliy;
   float         mult_alt;
   int           key[269];
 }               t_pos_win;
@@ -77,6 +77,9 @@ typedef struct  s_pos_win
 typedef struct  s_choix
 {
   int           draw;
+  int           x_or;
+  int           y_or;
+  int           z_or;
 }               t_choix;
 
 typedef struct  s_struct
@@ -102,17 +105,21 @@ int             fct_mouse(int button, int x, int y, t_struct *strct);
 int             key_off(int keycode, t_struct *strct);
 
 /*  ft_strsplit_int.c */
-int             **ft_strsplit_int(char *tab, char c);
+int             **ft_strsplit_int(t_struct *strct, char *tab, char c);
 
 /*  loop_img.c  */
 int             loop_img(t_struct *strct);
-void            line(t_pict *, int, int, int, int);
-void            clear_pixels(t_struct *);
+void            center(t_struct *strct);
 
 /*  pos.c */
 void            pos_iso(t_struct *);
 
 /*  put_pxl.c */
 int             ft_put_pxl(t_struct *strct);
+
+/*  rotations.c */
+void            rotation_z(t_struct *strct);
+void            rotation_x(t_struct *strct);
+void            rotation_y(t_struct *strct);
 
 #endif

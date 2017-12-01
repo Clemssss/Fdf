@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 21:32:44 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/01 19:11:13 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,22 @@
 #include "fdf.h"
 #include "libmlx.h"
 
-static	void 	rotation(t_struct *strct)
-{
-	float	radian;
-
-	radian = strct->pos_win->degre * 3.141 * 180;
-	strct->pos_iso->xmin = strct->pos_iso->xmin * cos(radian) - strct->pos_iso->ymin * sin(radian);
-	strct->pos_iso->ymin = strct->pos_iso->xmin * sin(radian) + strct->pos_iso->ymin * cos(radian);
-	strct->pos_iso->xmax = strct->pos_iso->xmax * cos(radian) - strct->pos_iso->ymax * sin(radian);
-	strct->pos_iso->ymax = strct->pos_iso->xmax * sin(radian) + strct->pos_iso->ymax * cos(radian);
-}
-
-static	void 	segment(t_struct *strct)
-{
-	pos_iso(strct);
-	rotation(strct);
-	draw_line(strct);
-}
-
 static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
 {
 	if (tab[x][y] == 48)
-	{
 		strct->coor->alt = 0;
-		strct->coor->altmin = 0;
-	}
 	else
-	{
 		strct->coor->alt = tab[x][y] * strct->pos_win->mult_alt;
-		strct->coor->altmin = tab[x][y];
-	}
 	if (tab[x][y + 1] == 48)
-	{
 		strct->coor->alt2 = 0;
-		strct->coor->altmax = 0;
-	}
 	else
-	{
 		strct->coor->alt2 = tab[x][y + 1] * strct->pos_win->mult_alt;
-		strct->coor->altmax = tab[x][y + 1];
-	}
+	if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
+		strct->coor->color = 0xF20A0A;
+	else if (strct->coor->alt < 0 || strct->coor->alt2 < 0)
+		strct->coor->color = 0x1BABF4;
+	else if (strct->coor->alt == 0 || strct->coor->alt2 == 0)
+		strct->coor->color = 0xFFFFFF;
 	strct->coor->imin = x;
 	strct->coor->jmin = y;
 	strct->coor->imax = x;
@@ -63,29 +39,36 @@ static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
 static	void 	remp_strct_x(t_struct *strct, int **tab, int x, int y)
 {
 	if (tab[x][y] == 48)
-	{
 		strct->coor->alt = 0;
-		strct->coor->altmin = 0;
-	}
 	else
-	{
 		strct->coor->alt = tab[x][y] * strct->pos_win->mult_alt;
-		strct->coor->altmin = tab[x][y];
-	}
 	if (tab[x + 1][y] == 48)
-	{
 		strct->coor->alt2 = 0;
-		strct->coor->altmax = 0;
-	}
 	else
-	{
 		strct->coor->alt2 = tab[x + 1][y] * strct->pos_win->mult_alt;
-		strct->coor->altmax = tab[x + 1][y];
-	}
+	if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
+		strct->coor->color = 0xF20A0A;
+	else if (strct->coor->alt < 0 || strct->coor->alt2 < 0)
+		strct->coor->color = 0x1BABF4;
+	else if (strct->coor->alt == 0 || strct->coor->alt2 == 0)
+		strct->coor->color = 0xFFFFFF;
 	strct->coor->imin = x;
 	strct->coor->jmin = y;
 	strct->coor->imax = x + 1;
 	strct->coor->jmax = y;
+}
+
+static	void 	segment(t_struct *strct, int x, int y, int c)
+{
+	if (c == 0)
+		remp_strct_y(strct, strct->win->coor, x, y);
+	else if (c == 1)
+		remp_strct_x(strct, strct->win->coor, x, y);
+	pos_iso(strct);
+	rotation_z(strct);
+	rotation_x(strct);
+	rotation_y(strct);
+	draw_line(strct);
 }
 
 int		ft_put_pxl(t_struct *strct)
@@ -93,10 +76,9 @@ int		ft_put_pxl(t_struct *strct)
 	int		x;
 	int		y;
 	int		il;
-	int		tl;
 
 	x = 0;
-	tl = ft_tablen_int(strct->win->coor);
+	center(strct);
 	while (strct->win->coor[x])
 	{
 		y = 0;
@@ -104,15 +86,9 @@ int		ft_put_pxl(t_struct *strct)
 		while (strct->win->coor[x][y])
 		{
 			if (y < il - 1)
-			{
-				remp_strct_y(strct, strct->win->coor, x, y);
-				segment(strct);
-			}
-			if (x < tl - 1 && y < ft_intlen(strct->win->coor[x + 1]))
-			{
-				remp_strct_x(strct, strct->win->coor, x, y);
-				segment(strct);
-			}
+				segment(strct, x, y, 0);
+			if (x < strct->win->tl - 1 && y < ft_intlen(strct->win->coor[x + 1]))
+				segment(strct, x, y, 1);
 			y++;
 		}
 		x++;

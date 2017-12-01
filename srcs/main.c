@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/30 21:18:36 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/01 18:55:33 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,21 @@ static	char	*read_and_fill(char **av)
 static	void 	init_strct(t_struct *strct)
 {
 	strct->pos_win->startx = 550;
-	strct->pos_win->starty = 750;
+	strct->pos_win->starty = 550;
 	strct->pos_win->pas = 50;
-	strct->pos_win->inclix = 1.7;
-	strct->pos_win->incliy = 2;
-	strct->pos_win->mult_alt = 16;
+	strct->pos_win->mult_alt = 1;
 	strct->coor->color = 0xFFFFFF;
 	strct->choix->draw = 0;
 	strct->pos_win->degre = 0;
+	strct->pos_win->degre2 = 0;
+	strct->pos_win->degre3 = 0;
+	strct->choix->x_or = 0;
+	strct->choix->y_or = 0;
+	strct->choix->z_or = 0;
+	strct->pos_iso->xmin = 0;
+	strct->pos_iso->ymin = 0;
+	strct->pos_iso->xmax = 0;
+	strct->pos_iso->ymax = 0;
 }
 
 int						main(int ac, char **av)
@@ -65,7 +72,7 @@ int						main(int ac, char **av)
 			|| (!(strct->pos_iso = (t_pos_iso *)ft_memalloc(sizeof(t_pos_iso))))
 			|| (!(strct->pos_win = (t_pos_win *)ft_memalloc(sizeof(t_pos_win))))
 			|| (!(strct->choix = (t_choix *)ft_memalloc(sizeof(t_choix))))
-			|| (!(strct->win->coor = ft_strsplit_int(tmp, '\n'))))
+			|| (!(strct->win->coor = ft_strsplit_int(strct, tmp, '\n'))))
 		return (-1);
 	ft_strdel(&tmp);
 	init_strct(strct);
