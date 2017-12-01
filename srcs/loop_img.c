@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:10 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 19:10:45 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/01 19:38:29 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static	void 	coor_center(t_struct *strct, int x, int y)
 {
 	int		alt;
 
-	if (strct->win->coor[x][y] == 48)
-		alt = 0;
-	else
-		alt = strct->win->coor[x][y] * strct->pos_win->mult_alt;
+	alt = (strct->win->coor[x][y] - '0') * strct->pos_win->mult_alt;
 	strct->choix->x_or = strct->pos_win->startx + x * strct->pos_win->pas
 	+ y * strct->pos_win->pas;
 	strct->choix->y_or = strct->pos_win->starty + x * strct->pos_win->pas

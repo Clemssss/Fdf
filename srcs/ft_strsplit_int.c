@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:11:24 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 19:09:06 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/01 19:38:35 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ int						**ft_strsplit_int(t_struct *strct, char *tab, char c)
 			{
 				if (ft_isdigit(tab[i]) || tab[i] == '-' || tab[i] == '+')
 				{
-					if (tab[i] == '0')
-						ret[x][y++] = '0';
-					else
-						ret[x][y++] = ft_atoi(&tab[i]);
+					ret[x][y++] = ft_atoi(&tab[i]) + '0';
 					while (ft_isdigit(tab[i]) || tab[i] == '-' || tab[i] == '+')
 						i++;
 				}

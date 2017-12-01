@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 19:11:13 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/01 19:38:18 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,8 @@
 
 static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
 {
-	if (tab[x][y] == 48)
-		strct->coor->alt = 0;
-	else
-		strct->coor->alt = tab[x][y] * strct->pos_win->mult_alt;
-	if (tab[x][y + 1] == 48)
-		strct->coor->alt2 = 0;
-	else
-		strct->coor->alt2 = tab[x][y + 1] * strct->pos_win->mult_alt;
+	strct->coor->alt = (tab[x][y] - '0') * strct->pos_win->mult_alt;
+	strct->coor->alt2 = (tab[x][y + 1] - '0') * strct->pos_win->mult_alt;
 	if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
 		strct->coor->color = 0xF20A0A;
 	else if (strct->coor->alt < 0 || strct->coor->alt2 < 0)
@@ -38,14 +32,8 @@ static	void 	remp_strct_y(t_struct *strct, int **tab, int x, int y)
 
 static	void 	remp_strct_x(t_struct *strct, int **tab, int x, int y)
 {
-	if (tab[x][y] == 48)
-		strct->coor->alt = 0;
-	else
-		strct->coor->alt = tab[x][y] * strct->pos_win->mult_alt;
-	if (tab[x + 1][y] == 48)
-		strct->coor->alt2 = 0;
-	else
-		strct->coor->alt2 = tab[x + 1][y] * strct->pos_win->mult_alt;
+	strct->coor->alt = (tab[x][y] - '0') * strct->pos_win->mult_alt;
+	strct->coor->alt2 = (tab[x + 1][y] - '0') * strct->pos_win->mult_alt;
 	if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
 		strct->coor->color = 0xF20A0A;
 	else if (strct->coor->alt < 0 || strct->coor->alt2 < 0)
