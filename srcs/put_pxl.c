@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 19:38:18 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/01 20:09:34 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static	void 	remp_strct_x(t_struct *strct, int **tab, int x, int y)
 	strct->coor->jmax = y;
 }
 
-static	void 	segment(t_struct *strct, int x, int y, int c)
+static	void 	make(t_struct *strct, int x, int y, int c)
 {
 	if (c == 0)
 		remp_strct_y(strct, strct->win->coor, x, y);
@@ -74,9 +74,9 @@ int		ft_put_pxl(t_struct *strct)
 		while (strct->win->coor[x][y])
 		{
 			if (y < il - 1)
-				segment(strct, x, y, 0);
+				make(strct, x, y, 0);
 			if (x < strct->win->tl - 1 && y < ft_intlen(strct->win->coor[x + 1]))
-				segment(strct, x, y, 1);
+				make(strct, x, y, 1);
 			y++;
 		}
 		x++;
