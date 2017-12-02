@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 20:00:45 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/02 18:09:49 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 static	void 	move(t_struct *strct)
 {
 	if (strct->pos_win->key[126])
-		strct->pos_win->starty -= 15;
+		strct->pos_win->starty = strct->pos_win->starty - 15;
 	if (strct->pos_win->key[125])
-		strct->pos_win->starty += 15;
+		strct->pos_win->starty = strct->pos_win->starty + 15;
 	if (strct->pos_win->key[123])
-		strct->pos_win->startx -= 15;
+		strct->pos_win->startx = strct->pos_win->startx - 15;
 	if (strct->pos_win->key[124])
-		strct->pos_win->startx += 15;
+		strct->pos_win->startx = strct->pos_win->startx + 15;
 }
 
 static	void 	rotate(t_struct *strct)
@@ -45,9 +45,9 @@ static	void 	rotate(t_struct *strct)
 static	void 	change_alt(t_struct *strct)
 {
 	if (strct->pos_win->key[69])
-		strct->pos_win->mult_alt += 1;
+		strct->pos_win->mult_alt += 0.7;
 	if (strct->pos_win->key[78])
-		strct->pos_win->mult_alt -= 1;
+		strct->pos_win->mult_alt -= 0.7;
 }
 
 int 					do_change(t_struct *strct)

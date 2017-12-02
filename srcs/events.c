@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:14:37 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 19:45:49 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/02 15:05:21 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		fct_mouse(int button, int x, int y, t_struct *strct)
 	(void)y;
 	if (button == 5)
 		strct->pos_win->pas += 1;
-	if (button == 4)
+	if (button == 4 && strct->pos_win->pas > 1)
 		strct->pos_win->pas -= 1;
 	return (0);
 }

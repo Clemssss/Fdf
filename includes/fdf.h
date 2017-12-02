@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 19:22:51 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/02 11:41:01 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ typedef struct  s_window
   int           height;
   void          *mlx;
   void          *window;
-  int           **coor;
-  int           tl;
-  int           il;
 }               t_window;
+
+typedef struct  s_tab
+{
+  int           **coor;
+  int           *len_coor;
+  int           tl;
+}               t_tab;
 
 typedef struct  s_pict
 {
@@ -90,6 +94,7 @@ typedef struct  s_struct
   t_pos_iso     *pos_iso;
   t_pos_win     *pos_win;
   t_choix       *choix;
+  t_tab         *tab;
 }               t_struct;
 
 /*  del_struct.c  */

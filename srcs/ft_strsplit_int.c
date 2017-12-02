@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:11:24 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 19:38:35 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/02 11:42:46 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int						**ft_strsplit_int(t_struct *strct, char *tab, char c)
 
 	i = 0;
 	x = 0;
-	strct->win->tl = size_tab(tab, c);
-	if(!(ret = (int **)ft_memalloc(sizeof(int *) * (strct->win->tl + 1))))
+	strct->tab->tl = size_tab(tab, c);
+	if ((!(ret = (int **)ft_memalloc(sizeof(int *) * (strct->tab->tl + 1))))
+		|| (!(strct->tab->len_coor = (int *)ft_memalloc(sizeof(int)
+			* (strct->tab->tl + 1)))))
 		return (NULL);
 	while (tab[i])
 	{
@@ -79,12 +81,13 @@ int						**ft_strsplit_int(t_struct *strct, char *tab, char c)
 					i++;
 			}
 			ret[x][y] = 0;
+			strct->tab->len_coor[x] = ft_intlen(ret[x]);
 			x++;
 		}
 		else
 			i++;
 	}
 	ret[x] = NULL;
-	strct->win->il = ft_intlen(ret[strct->win->tl / 2]);
+	strct->tab->len_coor[x] = '\0';
 	return (ret);
 }

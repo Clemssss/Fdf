@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clegirar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:44:46 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/23 22:00:52 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/02 11:10:38 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# define BUFF_SIZE 32
+# define BUFF_SIZE 10000
 # define CHAR '\n'
 
 typedef	struct		s_gnl
