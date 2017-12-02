@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/02 11:41:01 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/02 19:09:23 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int             loop_img(t_struct *strct);
 void            center(t_struct *strct);
 
 /*  pos.c */
-void            pos_iso(t_struct *);
+void            pos_iso(t_struct *strct);
+void            pos_para(t_struct *strct);
 
 /*  put_pxl.c */
 int             ft_put_pxl(t_struct *strct);

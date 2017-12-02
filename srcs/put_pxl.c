@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/02 18:19:40 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/02 19:57:22 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static	void 	make(t_struct *strct, int x, int y, int c)
 	else if (c == 1)
 		remp_strct_x(strct, strct->tab->coor, x, y);
 	pos_iso(strct);
+	//pos_para(strct);
 	rotation_z(strct);
 	rotation_x(strct);
 	rotation_y(strct);
