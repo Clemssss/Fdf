@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clegirar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:47:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/25 13:25:34 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 15:58:44 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static	int		check_char(t_gnl *temp, char **line, t_gnl **lst)
 
 	if (ft_strchr(temp->tmp, CHAR))
 	{
-		*line = ft_strsub(temp->tmp, 0, ft_strchr(temp->tmp, CHAR) - temp->tmp + 1);
+		*line = ft_strsub(temp->tmp, 0, ft_strchr(temp->tmp, CHAR) - temp->tmp);
 		l = temp->tmp;
 		temp->tmp = ft_strsub(temp->tmp, ft_strchr(temp->tmp, CHAR)
 				- temp->tmp + 1, ft_strlen(ft_strchr(temp->tmp, CHAR)));
@@ -103,7 +103,7 @@ int				get_next_line(const int fd, char **line)
 			&& (ret = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		temp->tmp = ft_memrealloc(temp->tmp,
-				ft_strlen(temp->tmp), BUFF_SIZE + 1);
+				ft_strlen(temp->tmp), ft_strlen(temp->tmp) + BUFF_SIZE + 1);
 		temp->tmp = ft_strcat(temp->tmp, buff);
 		ft_bzero(buff, BUFF_SIZE + 1);
 	}

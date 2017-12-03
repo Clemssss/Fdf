@@ -6,7 +6,7 @@
 /*   By: clegirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 08:52:16 by clegirar          #+#    #+#             */
-/*   Updated: 2017/11/27 12:39:57 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 16:51:13 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,10 @@ char				*ft_epurstr(char *str);
 void				ft_swap(int *a, int *b);
 char				*ft_strcapitalize(char *str);
 char				*ft_strrev(char *str);
-void				*ft_memrealloc(const void *s, size_t old, size_t new);
+void				*ft_memrealloc(void *s, size_t size_o, size_t size_n);
 void				ft_tabdel(char **tab);
 void				ft_puttab_int(int **tab);
+void				ft_putint(int *tab);
+void				ft_tabdel_int(int **tab);
 
 #endif

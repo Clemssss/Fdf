@@ -6,35 +6,96 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 13:31:33 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 17:54:17 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "get_next_line.h"
 #include "libft.h"
+#include "libmlx.h"
 
-static	char	*read_and_fill(char **av)
+static	int		nb_digit(char *line)
+{
+	int	nb;
+	int	i;
+
+	i = 0;
+	nb = 0;
+	while (line[i])
+	{
+		if (ft_isdigit(line[i]) || line[i] == '-' || line[i] == '+')
+		{
+			nb++;
+			while (ft_isdigit(line[i]) || line[i] == '-' || line[i] == '+')
+				i++;
+		}
+		else
+			i++;
+	}
+	return (nb);
+}
+
+static	int	*concat_line(char *line)
+{
+	int		i;
+	int		j;
+	int		*tab;
+
+	i = 0;
+	j = 0;
+	tab = NULL;
+	if (!(tab = (int *)ft_memalloc(sizeof(int) * (nb_digit(line) + 1))))
+		return (NULL);
+	while (line[i])
+	{
+		if (ft_isdigit(line[i]) || line[i] == '-' || line[i] == '+')
+		{
+			tab[j++] = ft_atoi(&line[i]) + '0';
+			while (ft_isdigit(line[i]) || line[i] == '-' || line[i] == '+')
+				i++;
+		}
+		else
+			i++;
+	}
+	tab[j] = '\0';
+	return (tab);
+}
+
+static	int	**read_and_fill(t_tab *strct, char **av)
 {
 	int		fd;
 	int		ret;
-	char	*tmp;
+	int		**tmp;
+	int		i;
+	int		tl;
+	int		il;
 	char	*line;
-	char	*l;
 
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (NULL);
-	tmp = NULL;
 	line = NULL;
+	tmp = NULL;
 	ret = 0;
+	i = 0;
+	strct->tl = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		l = tmp;
-		tmp = ft_strjoin(tmp, line);
-		ft_strdel(&l);
+		tl = ft_tablen_int(tmp);
+		il = ft_intlen(strct->len_coor);
+		tmp = (int**)ft_memrealloc((int**)tmp,
+		tl * sizeof(*tmp), tl * sizeof(*tmp) + 1);
+		strct->len_coor = (int*)ft_memrealloc((int*)strct->len_coor,
+		il * sizeof(*strct->len_coor), il * sizeof(*strct->len_coor) + 1);
+		tmp[i] = concat_line(line);
+		strct->len_coor[i] = ft_intlen(tmp[i]);
+		i++;
+		strct->tl += 1;
+		ft_strdel(&line);
 	}
 	if (ret == -1)
 		return (NULL);
+	tmp[i] = NULL;
 	return (tmp);
 }
 
@@ -44,15 +105,15 @@ static	void 	init_strct(t_struct *strct)
 	strct->pos_win->starty = 550;
 	strct->pos_win->pas = 50;
 	strct->pos_win->mult_alt = 1;
-	strct->coor->color = 0xFFFFFF;
+	strct->pict->color = 0xFFFFFF;
 	strct->choix->draw = 0;
 	strct->choix->diag = 0;
 	strct->pos_win->degre = 0;
 	strct->pos_win->degre2 = 0;
 	strct->pos_win->degre3 = 0;
-	strct->choix->x_or = 0;
-	strct->choix->y_or = 0;
-	strct->choix->z_or = 0;
+	strct->orig->x_or = 0;
+	strct->orig->y_or = 0;
+	strct->orig->z_or = 0;
 	strct->pos_iso->xmin = 0;
 	strct->pos_iso->ymin = 0;
 	strct->pos_iso->xmax = 0;
@@ -62,11 +123,9 @@ static	void 	init_strct(t_struct *strct)
 int						main(int ac, char **av)
 {
 	t_struct	*strct;
-	char			*tmp;
 
 	(void)ac;
-	if ((!(tmp = read_and_fill(av)))
-			|| (!(strct = (t_struct *)ft_memalloc(sizeof(t_struct))))
+	if ((!(strct = (t_struct *)ft_memalloc(sizeof(t_struct))))
 			|| (!(strct->win = (t_window *)ft_memalloc(sizeof(t_window))))
 			|| (!(strct->pict = (t_pict *)ft_memalloc(sizeof(t_pict))))
 			|| (!(strct->coor = (t_coor *)ft_memalloc(sizeof(t_coor))))
@@ -74,10 +133,11 @@ int						main(int ac, char **av)
 			|| (!(strct->pos_win = (t_pos_win *)ft_memalloc(sizeof(t_pos_win))))
 			|| (!(strct->choix = (t_choix *)ft_memalloc(sizeof(t_choix))))
 			|| (!(strct->tab = (t_tab *)ft_memalloc(sizeof(t_tab))))
-			|| (!(strct->tab->coor = ft_strsplit_int(strct, tmp, '\n'))))
+			|| (!(strct->orig = (t_orig *)ft_memalloc(sizeof(t_orig))))
+			|| (!(strct->tab->coor = read_and_fill(strct->tab, av))))
 		return (-1);
-	ft_strdel(&tmp);
 	init_strct(strct);
+	ft_puttab_int(strct->tab->coor);
 	loop_img(strct);
 	return (0);
 }

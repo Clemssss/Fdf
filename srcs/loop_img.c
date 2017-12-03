@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:10 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/02 18:17:45 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 17:53:48 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static	void 	coor_center(t_struct *strct, int x, int y)
 	int		alt;
 
 	alt = (strct->tab->coor[x][y] - '0');
-	strct->choix->x_or = strct->pos_win->startx + x * strct->pos_win->pas
+	strct->orig->x_or = strct->pos_win->startx + x * strct->pos_win->pas
 	+ y * strct->pos_win->pas;
-	strct->choix->y_or = strct->pos_win->starty + x * strct->pos_win->pas
+	strct->orig->y_or = strct->pos_win->starty + x * strct->pos_win->pas
 	- y * strct->pos_win->pas - alt;
-	strct->choix->z_or = alt;
+	strct->orig->z_or = alt;
 }
 
 void 	center(t_struct *strct)
@@ -46,7 +46,6 @@ int						loop_img(t_struct *strct)
 			|| (!(strct->pict->data = mlx_get_data_addr(strct->pict->img,
 				&strct->pict->bpp, &strct->pict->size_line, &strct->pict->endian))))
 		return (-1);
-	ft_puttab_int(strct->tab->coor);
 	ft_put_pxl(strct);
 	mlx_hook(strct->win->window, 2, 0, &fct_key, strct);
 	mlx_loop_hook(strct->win->mlx, &do_change, strct);

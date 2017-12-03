@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/02 18:09:49 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 17:38:35 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	void 	change_alt(t_struct *strct)
 
 int 					do_change(t_struct *strct)
 {
-	clear_pixels(strct);
+	clear_pixels(strct->pict);
 	move(strct);
 	change_alt(strct);
 	rotate(strct);

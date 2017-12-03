@@ -6,13 +6,13 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:42:59 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/01 12:00:38 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 17:54:58 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlx.h"
 
-static  void  draw_x(t_struct *strct, t_line line)
+static  void  draw_x(t_pict *pict, t_line line)
 {
   int   i;
   int   cumul;
@@ -30,12 +30,12 @@ static  void  draw_x(t_struct *strct, t_line line)
     }
     if ((line.x >= 0 && line.x < 1800)
       && (line.y >= 1 && line.y < 1800))
-        draw_pixel(strct->pict, line.x, line.y, strct->coor->color);
+        draw_pixel(pict, line.x, line.y, pict->color);
     i++;
   }
 }
 
-static  void  draw_y(t_struct *strct, t_line line)
+static  void  draw_y(t_pict *pict, t_line line)
 {
   int   i;
   int   cumul;
@@ -53,31 +53,31 @@ static  void  draw_y(t_struct *strct, t_line line)
     }
     if ((line.x >= 0 && line.x < 1800)
       && (line.y >= 1 && line.y < 1800))
-        draw_pixel(strct->pict, line.x, line.y, strct->coor->color);
+        draw_pixel(pict, line.x, line.y, pict->color);
     i++;
   }
 }
 
-void           draw_line(t_struct *strct)
+void           draw_line(t_pict *pict, int xmin, int ymin, int xmax, int ymax, int c)
 {
   t_line  line;
 
-  line.x = strct->pos_iso->xmin;
-  line.y = strct->pos_iso->ymin;
-  line.diff_x = strct->pos_iso->xmax - strct->pos_iso->xmin;
-  line.diff_y = strct->pos_iso->ymax - strct->pos_iso->ymin;
+  line.x = xmin;
+  line.y = ymin;
+  line.diff_x = xmax - xmin;
+  line.diff_y = ymax - ymin;
   line.x_incr = (line.diff_x > 0) ? 1 : -1;
   line.y_incr = (line.diff_y > 0) ? 1 : -1;
   line.diff_x = ABS(line.diff_x);
   line.diff_y = ABS(line.diff_y);
   if ((line.x >= 0 && line.x < 1800)
     && (line.y >= 1 && line.y < 1800))
-      draw_pixel(strct->pict, line.x, line.y, strct->coor->color);
-  if (strct->choix->draw == 0)
+      draw_pixel(pict, line.x, line.y, pict->color);
+  if (c == 0)
   {
     if (line.diff_x > line.diff_y)
-      draw_x(strct, line);
+      draw_x(pict, line);
     else
-      draw_y(strct, line);
+      draw_y(pict, line);
   }
 }
