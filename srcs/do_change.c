@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 22:45:12 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 23:06:03 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static	void 	color(t_struct *strct)
 		strct->hsv->saturation += 0.05;
 	if (strct->pos_win->key[4])
 		strct->hsv->saturation -= 0.05;
-	if (strct->pos_win->key[15])
+	if (strct->pos_win->key[32])
 		strct->hsv->value += 0.05;
-	if (strct->pos_win->key[3])
+	if (strct->pos_win->key[38])
 		strct->hsv->value -= 0.05;
 }
 

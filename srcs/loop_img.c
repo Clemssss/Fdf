@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:10 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 22:00:13 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 23:07:44 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int						loop_img(t_struct *strct)
 {
 	if (!(strct->win->mlx = mlx_init()))
 		return (-1);
-	strct->win->width = 1800;
-	strct->win->height = 1800;
+	strct->win->width = WIDTH;
+	strct->win->height = HEIGHT;
 	strct->pict->x = strct->win->width;
 	strct->pict->y = strct->win->height;
 	if ((!(strct->win->window = mlx_new_window(strct->win->mlx,

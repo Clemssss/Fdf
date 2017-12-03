@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:36:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 19:53:42 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 23:10:01 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBMLX_H
 
 # define ABS(Value) ((Value) < 0 ? - (Value) : (Value))
+# define WIDTH 1800
+# define HEIGHT 1200
 
 typedef struct  s_color
 {
