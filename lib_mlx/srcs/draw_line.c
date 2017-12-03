@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:42:59 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 17:54:58 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 19:00:20 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static  void  draw_x(t_pict *pict, t_line line)
     }
     if ((line.x >= 0 && line.x < 1800)
       && (line.y >= 1 && line.y < 1800))
-        draw_pixel(pict, line.x, line.y, pict->color);
+        draw_pixel(pict, line.x, line.y);
     i++;
   }
 }
@@ -53,7 +53,7 @@ static  void  draw_y(t_pict *pict, t_line line)
     }
     if ((line.x >= 0 && line.x < 1800)
       && (line.y >= 1 && line.y < 1800))
-        draw_pixel(pict, line.x, line.y, pict->color);
+        draw_pixel(pict, line.x, line.y);
     i++;
   }
 }
@@ -72,7 +72,7 @@ void           draw_line(t_pict *pict, int xmin, int ymin, int xmax, int ymax, i
   line.diff_y = ABS(line.diff_y);
   if ((line.x >= 0 && line.x < 1800)
     && (line.y >= 1 && line.y < 1800))
-      draw_pixel(pict, line.x, line.y, pict->color);
+      draw_pixel(pict, line.x, line.y);
   if (c == 0)
   {
     if (line.diff_x > line.diff_y)

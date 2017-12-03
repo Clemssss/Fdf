@@ -6,23 +6,15 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:43:25 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 17:39:52 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 19:49:08 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlx.h"
 
-void 	draw_pixel(t_pict *pict, int x, int y, unsigned int color)
+void 	draw_pixel(t_pict *pict, int x, int y)
 {
-	unsigned	char	r;
-	unsigned	char	g;
-	unsigned	char	b;
-
-	r = (color & 0xFF0000) >> 16;
-  g = (color & 0xFF00) >> 8;
-  b = (color & 0xFF);
-
-  pict->data[y * pict->size_line + x * pict->bpp / 8] = b;
-  pict->data[y * pict->size_line + x * pict->bpp / 8 + 1] = g;
-  pict->data[y * pict->size_line + x * pict->bpp / 8 + 2] = r;
+  pict->data[y * pict->size_line + x * pict->bpp / 8] = pict->b;
+  pict->data[y * pict->size_line + x * pict->bpp / 8 + 1] = pict->g;
+  pict->data[y * pict->size_line + x * pict->bpp / 8 + 2] = pict->r;
 }

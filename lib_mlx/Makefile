@@ -6,7 +6,7 @@
 #    By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/30 11:30:22 by clegirar          #+#    #+#              #
-#    Updated: 2017/12/03 17:45:00 by clegirar         ###   ########.fr        #
+#    Updated: 2017/12/03 19:52:24 by clegirar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME	=	ft_libmlx.a
 
 SRCS	=	./srcs/clear_pixels.c			\
 				./srcs/draw_pixel.c				\
-				./srcs/draw_line.c
+				./srcs/draw_line.c				\
+				./srcs/convert_hsv_rgb.c
 
 OBJS	=	$(SRCS:.c=.o)
 
@@ -35,7 +36,8 @@ clean	:
 				rm -rf $(OBJS)
 
 fclean	:
-					rm -rf $(OBJS) $(NAME)
+					rm -rf $(OBJS)
+					rm -rf $(NAME)
 
 re			:	fclean all
 

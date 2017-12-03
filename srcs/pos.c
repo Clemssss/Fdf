@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:12:18 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 17:32:57 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 22:26:10 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void 	pos_para(t_struct *strct)
 {
 	strct->pos_iso->xmin = strct->pos_win->startx
 	+ strct->coor->imin * strct->pos_win->pas
-	+ 1 * strct->coor->alt;
+	- strct->coor->alt;
 	strct->pos_iso->ymin = strct->pos_win->starty
 	+ strct->coor->jmin * strct->pos_win->pas
-	+ 1 / 2 * strct->coor->alt;
+	- strct->coor->alt;
 	strct->pos_iso->xmax = strct->pos_win->startx
 	+ strct->coor->imax * strct->pos_win->pas
-	+ 1 * strct->coor->alt2;
+	- strct->coor->alt2;
 	strct->pos_iso->ymax = strct->pos_win->starty
 	+ strct->coor->jmax * strct->pos_win->pas
-	+ 1 / 2 * strct->coor->alt2;
+	- strct->coor->alt2;
 }

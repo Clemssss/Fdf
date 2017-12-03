@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 17:47:11 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 22:00:52 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include <unistd.h>
 # include <math.h>
 # include "../lib_mlx/includes/libmlx.h"
+
+typedef struct  s_hsv
+{
+  float         hue;
+  float         saturation;
+  float         value;
+}               t_hsv;
 
 typedef struct  s_tab
 {
@@ -64,6 +71,7 @@ typedef struct  s_choix
 {
   int           draw;
   int           diag;
+  int           pos;
 }               t_choix;
 
 typedef struct  s_orig
@@ -83,6 +91,7 @@ typedef struct  s_struct
   t_choix       *choix;
   t_tab         *tab;
   t_orig        *orig;
+  t_hsv         *hsv;
 }               t_struct;
 
 /*  del_struct.c  */

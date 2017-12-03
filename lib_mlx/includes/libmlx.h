@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:36:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 17:53:23 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 19:53:42 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 # define LIBMLX_H
 
 # define ABS(Value) ((Value) < 0 ? - (Value) : (Value))
+
+typedef struct  s_color
+{
+  float         c;
+  float         x;
+  float         m;
+  float         red;
+  float         green;
+  float         blue;
+}               t_color;
 
 typedef struct  s_window
 {
@@ -25,7 +35,9 @@ typedef struct  s_window
 
 typedef struct  s_pict
 {
-	unsigned	int	color;
+	int           r;
+  int           g;
+  int           b;
   char          *data;
   void          *img;
   int           bpp;
@@ -48,8 +60,11 @@ typedef	struct	s_line
 /*	clear_pixels.c */
 void 	clear_pixels(t_pict *pict);
 
+/*	convert_hsv_rgb	*/
+void	conv_hsv_rgb(t_pict *pict, float, float, float);
+
 /*	draw_pixel.c	*/
-void 	draw_pixel(t_pict *pict, int x, int y, unsigned int color);
+void 	draw_pixel(t_pict *pict, int x, int y);
 
 /*	draw_line.c	*/
 void 	draw_line(t_pict *, int, int, int, int, int);

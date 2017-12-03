@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 17:54:17 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 22:31:45 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,12 @@ static	void 	init_strct(t_struct *strct)
 	strct->pos_win->starty = 550;
 	strct->pos_win->pas = 50;
 	strct->pos_win->mult_alt = 1;
-	strct->pict->color = 0xFFFFFF;
+	strct->hsv->hue = 0;
+	strct->hsv->saturation = 1;
+	strct->hsv->value = 1;
 	strct->choix->draw = 0;
 	strct->choix->diag = 0;
+	strct->choix->pos = 0;
 	strct->pos_win->degre = 0;
 	strct->pos_win->degre2 = 0;
 	strct->pos_win->degre3 = 0;
@@ -134,6 +137,7 @@ int						main(int ac, char **av)
 			|| (!(strct->choix = (t_choix *)ft_memalloc(sizeof(t_choix))))
 			|| (!(strct->tab = (t_tab *)ft_memalloc(sizeof(t_tab))))
 			|| (!(strct->orig = (t_orig *)ft_memalloc(sizeof(t_orig))))
+			|| (!(strct->hsv = (t_hsv *)ft_memalloc(sizeof(t_hsv))))
 			|| (!(strct->tab->coor = read_and_fill(strct->tab, av))))
 		return (-1);
 	init_strct(strct);

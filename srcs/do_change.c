@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 17:38:35 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 22:45:12 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,42 @@ static	void 	change_alt(t_struct *strct)
 		strct->pos_win->mult_alt -= 0.7;
 }
 
+static	void 	color(t_struct *strct)
+{
+	if (strct->pos_win->key[17])
+		strct->hsv->hue += 15;
+	if (strct->pos_win->key[5])
+		strct->hsv->hue -= 15;
+	if (strct->pos_win->key[16])
+		strct->hsv->saturation += 0.05;
+	if (strct->pos_win->key[4])
+		strct->hsv->saturation -= 0.05;
+	if (strct->pos_win->key[15])
+		strct->hsv->value += 0.05;
+	if (strct->pos_win->key[3])
+		strct->hsv->value -= 0.05;
+}
+
 int 					do_change(t_struct *strct)
 {
 	clear_pixels(strct->pict);
+	color(strct);
 	move(strct);
 	change_alt(strct);
 	rotate(strct);
 	ft_put_pxl(strct);
+	if (strct->hsv->hue > 360)
+		strct->hsv->hue = 0;
+	if (strct->hsv->hue < 0)
+		strct->hsv->hue = 360;
+	if (strct->hsv->saturation < 0)
+		strct->hsv->saturation = 1;
+	if (strct->hsv->saturation > 1)
+		strct->hsv->saturation = 0;
+	if (strct->hsv->value < 0)
+		strct->hsv->value = 1;
+	if (strct->hsv->value > 1)
+		strct->hsv->value = 0;
 	mlx_put_image_to_window(strct->win->mlx,
 		strct->win->window, strct->pict->img, 0, 0);
 	return (0);
