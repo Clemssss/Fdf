@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/02 19:09:23 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/03 12:59:17 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct  s_pos_win
 typedef struct  s_choix
 {
   int           draw;
+  int           diag;
   int           x_or;
   int           y_or;
   int           z_or;
