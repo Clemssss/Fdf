@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 22:00:52 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:46:22 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@
 # include <math.h>
 # include "../lib_mlx/includes/libmlx.h"
 
-typedef struct  s_hsv
-{
-  float         hue;
-  float         saturation;
-  float         value;
-}               t_hsv;
+# define WIDTH_MENU 400
+# define HEIGHT_MENU HEIGHT
 
 typedef struct  s_tab
 {
@@ -67,11 +63,20 @@ typedef struct  s_pos_win
   int           key[269];
 }               t_pos_win;
 
+typedef struct  s_menu
+{
+  void          *img;
+  int           x;
+  int           y;
+}               t_menu;
+
 typedef struct  s_choix
 {
   int           draw;
   int           diag;
-  int           pos;
+  int           iso;
+  int           para;
+  int           color;
 }               t_choix;
 
 typedef struct  s_orig
@@ -92,6 +97,7 @@ typedef struct  s_struct
   t_tab         *tab;
   t_orig        *orig;
   t_hsv         *hsv;
+  t_menu        *menu;
 }               t_struct;
 
 /*  del_struct.c  */
@@ -99,6 +105,7 @@ void			      free_strct(t_struct *strct);
 
 /*  do_change */
 int             do_change(t_struct *strct);
+void            color(t_struct *strct, int x, int y, int x2, int y2);
 
 /*  events.c  */
 int             choice(int keycode, t_struct *strct);

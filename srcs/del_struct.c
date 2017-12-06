@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 17:16:28 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 20:12:12 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/05 17:22:54 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	free_strct(t_struct *strct)
 	free(strct->tab);
 	free(strct->orig);
 	free(strct->hsv);
+	free(strct->menu);
 	free(strct);
 }

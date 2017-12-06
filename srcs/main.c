@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 22:31:45 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:05:53 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,12 @@ static	int	**read_and_fill(t_tab *strct, char **av)
 	{
 		tl = ft_tablen_int(tmp);
 		il = ft_intlen(strct->len_coor);
-		tmp = (int**)ft_memrealloc((int**)tmp,
-		tl * sizeof(*tmp), tl * sizeof(*tmp) + 1);
-		strct->len_coor = (int*)ft_memrealloc((int*)strct->len_coor,
-		il * sizeof(*strct->len_coor), il * sizeof(*strct->len_coor) + 1);
-		tmp[i] = concat_line(line);
+		if ((!(tmp = (int**)ft_memrealloc((int**)tmp,
+					tl * sizeof(*tmp), tl * sizeof(*tmp) + 1)))
+				|| (!(strct->len_coor = (int*)ft_memrealloc((int*)strct->len_coor,
+						il * sizeof(*strct->len_coor), il * sizeof(*strct->len_coor) + 1)))
+				|| (!(tmp[i] = concat_line(line))))
+			return (NULL);
 		strct->len_coor[i] = ft_intlen(tmp[i]);
 		i++;
 		strct->tl += 1;
@@ -101,16 +102,21 @@ static	int	**read_and_fill(t_tab *strct, char **av)
 
 static	void 	init_strct(t_struct *strct)
 {
-	strct->pos_win->startx = 550;
+	float	ratio;
+
+	strct->pos_win->startx = 550 + WIDTH_MENU;
 	strct->pos_win->starty = 550;
-	strct->pos_win->pas = 50;
+	ratio = 10 / (float)strct->tab->tl;
+	strct->pos_win->pas = ratio * 43;
 	strct->pos_win->mult_alt = 1;
-	strct->hsv->hue = 0;
+	strct->hsv->hue = 120;
 	strct->hsv->saturation = 1;
 	strct->hsv->value = 1;
 	strct->choix->draw = 0;
 	strct->choix->diag = 0;
-	strct->choix->pos = 0;
+	strct->choix->iso = 1;
+	strct->choix->para = 0;
+	strct->choix->color = 0;
 	strct->pos_win->degre = 0;
 	strct->pos_win->degre2 = 0;
 	strct->pos_win->degre3 = 0;
@@ -138,6 +144,7 @@ int						main(int ac, char **av)
 			|| (!(strct->tab = (t_tab *)ft_memalloc(sizeof(t_tab))))
 			|| (!(strct->orig = (t_orig *)ft_memalloc(sizeof(t_orig))))
 			|| (!(strct->hsv = (t_hsv *)ft_memalloc(sizeof(t_hsv))))
+			|| (!(strct->menu = (t_menu *)ft_memalloc(sizeof(t_menu))))
 			|| (!(strct->tab->coor = read_and_fill(strct->tab, av))))
 		return (-1);
 	init_strct(strct);

@@ -6,54 +6,54 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:42:59 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 23:08:15 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:53:34 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlx.h"
 
-static  void  draw_x(t_pict *pict, t_line line)
+static  void  draw_x(t_pict *pict, t_line *line)
 {
   int   i;
   int   cumul;
 
-  cumul = line.diff_x / 2;
+  cumul = line->diff_x / 2;
   i = 0;
-  while (i < line.diff_x)
+  while (i < line->diff_x)
   {
-    line.x += line.x_incr;
-    cumul += line.diff_y;
-    if (cumul >= line.diff_x)
+    line->x += line->x_incr;
+    cumul += line->diff_y;
+    if (cumul >= line->diff_x)
     {
-      cumul -= line.diff_x;
-      line.y += line.y_incr;
+      cumul -= line->diff_x;
+      line->y += line->y_incr;
     }
-    if ((line.x >= 0 && line.x < WIDTH)
-      && (line.y >= 1 && line.y < HEIGHT))
-        draw_pixel(pict, line.x, line.y);
+    if ((line->x >= 0 && line->x < WIDTH)
+      && (line->y >= 1 && line->y < HEIGHT))
+        draw_pixel(pict, line->x, line->y);
     i++;
   }
 }
 
-static  void  draw_y(t_pict *pict, t_line line)
+static  void  draw_y(t_pict *pict, t_line *line)
 {
   int   i;
   int   cumul;
 
-  cumul = line.diff_y / 2;
+  cumul = line->diff_y / 2;
   i = 0;
-  while (i < line.diff_y)
+  while (i < line->diff_y)
   {
-    line.y += line.y_incr;
-    cumul += line.diff_x;
-    if (cumul >= line.diff_y)
+    line->y += line->y_incr;
+    cumul += line->diff_x;
+    if (cumul >= line->diff_y)
     {
-      cumul -= line.diff_y;
-      line.x += line.x_incr;
+      cumul -= line->diff_y;
+      line->x += line->x_incr;
     }
-    if ((line.x >= 0 && line.x < WIDTH)
-      && (line.y >= 1 && line.y < HEIGHT))
-        draw_pixel(pict, line.x, line.y);
+    if ((line->x >= 0 && line->x < WIDTH)
+      && (line->y >= 1 && line->y < HEIGHT))
+        draw_pixel(pict, line->x, line->y);
     i++;
   }
 }
@@ -76,8 +76,8 @@ void           draw_line(t_pict *pict, int xmin, int ymin, int xmax, int ymax, i
   if (c == 0)
   {
     if (line.diff_x > line.diff_y)
-      draw_x(pict, line);
+      draw_x(pict, &line);
     else
-      draw_y(pict, line);
+      draw_y(pict, &line);
   }
 }

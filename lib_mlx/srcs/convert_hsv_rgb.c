@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 19:21:19 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 20:02:18 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/06 15:11:10 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void					conv_hsv_rgb(t_pict *pict, float h, float s, float v)
 	t_color		color;
 
 	color.c = v * s;
-	color.x = color.c * (1 - (((int)h / 60) % 2 - 1));
+	color.x = color.c * (1 - ((int)h / 60) % 2 - 1);
 	color.m = v - color.c;
 	if (h >= 0 && h < 180)
 		h_0_to_180(&color, h);

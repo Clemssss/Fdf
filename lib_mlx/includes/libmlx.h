@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:36:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/03 23:10:01 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:45:20 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # define WIDTH 1800
 # define HEIGHT 1200
 
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+
 typedef struct  s_color
 {
   float         c;
@@ -26,6 +30,13 @@ typedef struct  s_color
   float         green;
   float         blue;
 }               t_color;
+
+typedef struct  s_hsv
+{
+  float         hue;
+  float         saturation;
+  float         value;
+}               t_hsv;
 
 typedef struct  s_window
 {
@@ -68,7 +79,7 @@ void	conv_hsv_rgb(t_pict *pict, float, float, float);
 /*	draw_pixel.c	*/
 void 	draw_pixel(t_pict *pict, int x, int y);
 
-/*	draw_line.c	*/
+/*	draw_line.c  */
 void 	draw_line(t_pict *, int, int, int, int, int);
 
 #endif
