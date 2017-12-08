@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:14:37 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:24:41 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:44:55 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		fct_key(int keycode, t_struct *strct)
 		strct->choix->color_x = ((strct->choix->color_x) == 0 ? 1 : 0);
 	if (keycode == 7)
 		strct->choix->color_y = ((strct->choix->color_y) == 0 ? 1 : 0);
+	if (keycode == 8)
+		strct->choix->color_alt = ((strct->choix->color_alt) == 0 ? 1 : 0);
 	if (keycode == 35)
 		strct->choix->draw = ((strct->choix->draw) == 0 ? 1 : 0);
 	if (keycode == 31)
@@ -67,7 +69,8 @@ int 	key_off(int keycode, t_struct *strct)
 {
 	(void)strct;
 	if (keycode && keycode != 35 && keycode != 31 && keycode != 6
-		&& keycode != 30 && keycode != 33 && keycode != 34 && keycode != 7)
+		&& keycode != 30 && keycode != 33 && keycode != 34 && keycode != 7
+		&& keycode != 8)
 		strct->pos_win->key[keycode] = 0;
 	return (0);
 }

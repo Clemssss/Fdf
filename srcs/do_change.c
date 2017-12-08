@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:19:05 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:36:01 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,6 @@ static	void 	change_alt(t_struct *strct)
 		strct->pos_win->mult_alt += 0.7;
 	if (strct->pos_win->key[78])
 		strct->pos_win->mult_alt -= 0.7;
-}
-
-void 	color(t_struct *strct, int x, int y, int x2, int y2)
-{
-	if (strct->tab->coor[x][y] - '0' || strct->tab->coor[x2][y2] - '0')
-	{
-		strct->hsv->hue = 0;
-		strct->hsv->saturation = 1;
-		strct->hsv->value = 1;
-	}
-	else
-	{
-		strct->hsv->hue = 120;
-		strct->hsv->saturation = 1;
-		strct->hsv->value = 1;
-	}
-	if (strct->choix->color_x)
-		strct->hsv->saturation = x * 1 / (float)strct->tab->tl;
-	else if (strct->choix->color_y)
-		strct->hsv->saturation = y * 1 / (float)strct->tab->len_coor[x];
 }
 
 static	void 	color_change(t_struct *strct)

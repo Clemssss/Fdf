@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:23:35 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:39:21 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct  s_choix
   int           para;
   int           color_x;
   int           color_y;
+  int           color_alt;
 }               t_choix;
 
 typedef struct  s_orig
@@ -101,12 +102,14 @@ typedef struct  s_struct
   t_menu        *menu;
 }               t_struct;
 
+/*  color.c */
+void            color(t_struct *strct, int x, int y, int x2, int y2);
+
 /*  del_struct.c  */
 void			      free_strct_exit(t_struct *strct);
 
 /*  do_change */
 int             do_change(t_struct *strct);
-void            color(t_struct *strct, int x, int y, int x2, int y2);
 
 /*  events.c  */
 int             choice(int keycode, t_struct *strct);
@@ -116,7 +119,6 @@ int             key_off(int keycode, t_struct *strct);
 
 /*  loop_img.c  */
 int             loop_img(t_struct *strct);
-void            center(t_struct *strct);
 
 /*  pos.c */
 void            pos_iso(t_struct *strct);

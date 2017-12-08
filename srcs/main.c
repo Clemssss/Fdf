@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:11:47 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:37:49 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ static	void 	init_strct(t_struct *strct)
 	strct->choix->para = 0;
 	strct->choix->color_x = 0;
 	strct->choix->color_y = 0;
+	strct->choix->color_alt = 0;
 	strct->pos_win->degre = 0;
 	strct->pos_win->degre2 = 0;
 	strct->pos_win->degre3 = 0;

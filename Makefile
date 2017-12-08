@@ -6,7 +6,7 @@
 #    By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/24 16:33:19 by clegirar          #+#    #+#              #
-#    Updated: 2017/12/06 18:47:02 by clegirar         ###   ########.fr        #
+#    Updated: 2017/12/08 12:36:32 by clegirar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ SRCS	=	./srcs/main.c								\
 				./srcs/put_pxl.c						\
 				./srcs/events.c							\
 				./srcs/do_change.c					\
-				./srcs/rotations.c
-				
+				./srcs/rotations.c					\
+				./srcs/color.c
+
 OBJS	=	$(SRCS:.c=.o)
 
 CC		=	gcc
