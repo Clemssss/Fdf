@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:10 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/06 17:49:00 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:24:30 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int						loop_img(t_struct *strct)
 	mlx_mouse_hook(strct->win->window, &fct_mouse, strct);
 	mlx_key_hook(strct->win->window, &key_off, strct);
 	mlx_loop(strct->win->mlx);
-	free_strct(strct);
+	free_strct_exit(strct);
 	return (0);
 }

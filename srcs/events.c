@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:14:37 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/05 21:19:43 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:24:41 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@
 int		fct_key(int keycode, t_struct *strct)
 {
 	if (keycode == 53)
-	{
-		mlx_destroy_image(strct->win->mlx, strct->pict->img);
-		mlx_destroy_window(strct->win->mlx, strct->win->window);
-		free_strct(strct);
-		exit(0);
-	}
+		free_strct_exit(strct);
 	if (keycode == 6)
-		strct->choix->color = ((strct->choix->color) == 0 ? 1 : 0);
+		strct->choix->color_x = ((strct->choix->color_x) == 0 ? 1 : 0);
+	if (keycode == 7)
+		strct->choix->color_y = ((strct->choix->color_y) == 0 ? 1 : 0);
 	if (keycode == 35)
 		strct->choix->draw = ((strct->choix->draw) == 0 ? 1 : 0);
 	if (keycode == 31)
@@ -38,7 +35,7 @@ int		fct_key(int keycode, t_struct *strct)
 	if (keycode == 33)
 		strct->pos_win->pas -= 1;
 	if (keycode && keycode != 35 && keycode != 31 && keycode != 6
-		&& keycode != 30 && keycode != 33 && keycode != 34)
+		&& keycode != 30 && keycode != 33 && keycode != 34 && keycode != 7)
 		strct->pos_win->key[keycode] = 1;
 	return (0);
 }
@@ -70,7 +67,7 @@ int 	key_off(int keycode, t_struct *strct)
 {
 	(void)strct;
 	if (keycode && keycode != 35 && keycode != 31 && keycode != 6
-		&& keycode != 30 && keycode != 33 && keycode != 34)
+		&& keycode != 30 && keycode != 33 && keycode != 34 && keycode != 7)
 		strct->pos_win->key[keycode] = 0;
 	return (0);
 }

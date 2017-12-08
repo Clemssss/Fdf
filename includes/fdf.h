@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/06 18:46:22 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:23:35 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ typedef struct  s_choix
   int           diag;
   int           iso;
   int           para;
-  int           color;
+  int           color_x;
+  int           color_y;
 }               t_choix;
 
 typedef struct  s_orig
@@ -101,7 +102,7 @@ typedef struct  s_struct
 }               t_struct;
 
 /*  del_struct.c  */
-void			      free_strct(t_struct *strct);
+void			      free_strct_exit(t_struct *strct);
 
 /*  do_change */
 int             do_change(t_struct *strct);

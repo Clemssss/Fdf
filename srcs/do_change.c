@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/06 18:49:49 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:19:05 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ static	void 	change_alt(t_struct *strct)
 		strct->pos_win->mult_alt -= 0.7;
 }
 
-static	void 	test_color(t_struct *strct, int x, int y, int x2, int y2)
+void 	color(t_struct *strct, int x, int y, int x2, int y2)
 {
-	float	t;
-
 	if (strct->tab->coor[x][y] - '0' || strct->tab->coor[x2][y2] - '0')
 	{
 		strct->hsv->hue = 0;
@@ -66,14 +64,10 @@ static	void 	test_color(t_struct *strct, int x, int y, int x2, int y2)
 		strct->hsv->saturation = 1;
 		strct->hsv->value = 1;
 	}
-	t = 1 / (float)strct->tab->tl;
-	strct->hsv->saturation = x * t;
-}
-
-void 	color(t_struct *strct, int x, int y, int x2, int y2)
-{
-	if (strct->choix->color)
-		test_color(strct, x, y, x2, y2);
+	if (strct->choix->color_x)
+		strct->hsv->saturation = x * 1 / (float)strct->tab->tl;
+	else if (strct->choix->color_y)
+		strct->hsv->saturation = y * 1 / (float)strct->tab->len_coor[x];
 }
 
 static	void 	color_change(t_struct *strct)
@@ -92,14 +86,8 @@ static	void 	color_change(t_struct *strct)
 		strct->hsv->value -= 0.05;
 }
 
-int 					do_change(t_struct *strct)
+static	void 	hsv_overflow(t_struct *strct)
 {
-	clear_pixels(strct->pict);
-	move(strct);
-	change_alt(strct);
-	rotate(strct);
-	color_change(strct);
-	ft_put_pxl(strct);
 	if (strct->hsv->hue >= 360)
 		strct->hsv->hue = 0;
 	if (strct->hsv->hue < 0)
@@ -112,6 +100,17 @@ int 					do_change(t_struct *strct)
 		strct->hsv->value = 1;
 	if (strct->hsv->value > 1.1)
 		strct->hsv->value = 0;
+}
+
+int 					do_change(t_struct *strct)
+{
+	clear_pixels(strct->pict);
+	move(strct);
+	change_alt(strct);
+	rotate(strct);
+	color_change(strct);
+	ft_put_pxl(strct);
+	hsv_overflow(strct);
 	mlx_put_image_to_window(strct->win->mlx,
 		strct->win->window, strct->pict->img, 0, 0);
 	mlx_put_image_to_window(strct->win->mlx,

@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/06 18:46:42 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:22:18 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ static	void 	remp_strct(t_struct *strct, int **tab, int x, int y)
 	strct->coor->jmax = y;
 }
 
-static	void 	make(t_struct *strct, int x, int y, int c)
+static	void 	check_x_y(t_struct *strct, int x, int y, int c)
 {
-	strct->coor->alt = (strct->tab->coor[x][y] - '0') * strct->pos_win->mult_alt;
-	strct->coor->imin = x;
-	strct->coor->jmin = y;
-	//color(strct, x, y, x, y);
 	if (c == 0)
 	{
 		remp_strct(strct, strct->tab->coor, x, y + 1);
@@ -42,6 +38,14 @@ static	void 	make(t_struct *strct, int x, int y, int c)
 		remp_strct(strct, strct->tab->coor, x + 1, y + 1);
 		color(strct, x, y, x + 1, y + 1);
 	}
+}
+
+static	void 	make(t_struct *strct, int x, int y, int c)
+{
+	strct->coor->alt = (strct->tab->coor[x][y] - '0') * strct->pos_win->mult_alt;
+	strct->coor->imin = x;
+	strct->coor->jmin = y;
+	check_x_y(strct, x, y, c);
 	if (strct->choix->iso == 1)
 		pos_iso(strct);
 	else if (strct->choix->para == 1)

@@ -6,15 +6,18 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 17:16:28 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/05 17:22:54 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:24:13 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
+#include "mlx.h"
 
-void	free_strct(t_struct *strct)
+void	free_strct_exit(t_struct *strct)
 {
+	mlx_destroy_image(strct->win->mlx, strct->pict->img);
+	mlx_destroy_window(strct->win->mlx, strct->win->window);
 	ft_tabdel_int(strct->tab->coor);
 	free(strct->tab->len_coor);
 	free(strct->win);
@@ -28,4 +31,5 @@ void	free_strct(t_struct *strct)
 	free(strct->hsv);
 	free(strct->menu);
 	free(strct);
+	exit(0);
 }
