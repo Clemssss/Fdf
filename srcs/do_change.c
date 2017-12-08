@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:36:01 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 17:37:27 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ static	void 	hsv_overflow(t_struct *strct)
 		strct->hsv->hue = 0;
 	if (strct->hsv->hue < 0)
 		strct->hsv->hue = 360;
-	if (strct->hsv->saturation < 0)
+	/*if (strct->hsv->saturation < 0)
 		strct->hsv->saturation = 1;
 	if (strct->hsv->saturation > 1.1)
 		strct->hsv->saturation = 0;
 	if (strct->hsv->value < 0)
 		strct->hsv->value = 1;
 	if (strct->hsv->value > 1.1)
-		strct->hsv->value = 0;
+		strct->hsv->value = 0;*/
 }
 
 int 					do_change(t_struct *strct)
@@ -94,6 +94,6 @@ int 					do_change(t_struct *strct)
 	mlx_put_image_to_window(strct->win->mlx,
 		strct->win->window, strct->pict->img, 0, 0);
 	mlx_put_image_to_window(strct->win->mlx,
-		strct->win->window, strct->menu->img, 0, 0);
+		strct->win->window, strct->menu->img, 0, -5);
 	return (0);
 }

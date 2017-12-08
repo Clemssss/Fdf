@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:39:15 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 17:12:07 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static	void 	check_x_y(t_struct *strct, int x, int y, int c)
 		remp_strct(strct, strct->tab->coor, x + 1, y + 1);
 		color(strct, x, y, x + 1, y + 1);
 	}
+	strct->choix->c = 1;
 }
 
 static	void 	make(t_struct *strct, int x, int y, int c)
@@ -85,6 +86,7 @@ int		ft_put_pxl(t_struct *strct)
 
 	x = 0;
 	center(strct);
+	strct->choix->c = 0;
 	while (strct->tab->coor[x])
 	{
 		y = 0;

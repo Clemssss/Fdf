@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:39:21 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/08 17:10:39 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ typedef struct  s_choix
   int           color_x;
   int           color_y;
   int           color_alt;
+  int           t;
+  int           reset;
+  int           c;
 }               t_choix;
 
 typedef struct  s_orig
