@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 19:08:06 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 20:01:34 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mlx.h"
 #include "libmlx.h"
 
-static	void 	move(t_struct *strct)
+static	void	move(t_struct *strct)
 {
 	if (strct->pos_win->key[126])
 		strct->pos_win->starty = strct->pos_win->starty - 15;
@@ -26,7 +26,7 @@ static	void 	move(t_struct *strct)
 		strct->pos_win->startx = strct->pos_win->startx + 15;
 }
 
-static	void 	rotate(t_struct *strct)
+static	void	rotate(t_struct *strct)
 {
 	if (strct->pos_win->key[13])
 		strct->pos_win->degre += 1;
@@ -42,7 +42,7 @@ static	void 	rotate(t_struct *strct)
 		strct->pos_win->degre3 -= 1;
 }
 
-static	void 	change_alt(t_struct *strct)
+static	void	change_alt(t_struct *strct)
 {
 	if (strct->pos_win->key[69])
 		strct->pos_win->mult_alt += 0.7;
@@ -54,7 +54,7 @@ static	void 	change_alt(t_struct *strct)
 		strct->pos_win->pas -= 1;
 }
 
-static	void 	hsv_overflow_alt(t_struct *strct)
+static	void	hsv_overflow_alt(t_struct *strct)
 {
 	if (strct->hsv->hue_alt >= 360)
 		strct->hsv->hue_alt = 0;
@@ -70,7 +70,7 @@ static	void 	hsv_overflow_alt(t_struct *strct)
 		strct->hsv->value_alt = 0;
 }
 
-static	void 	hsv_overflow(t_struct *strct)
+static	void	hsv_overflow(t_struct *strct)
 {
 	if (strct->hsv->hue >= 360)
 		strct->hsv->hue = 0;
@@ -86,7 +86,7 @@ static	void 	hsv_overflow(t_struct *strct)
 		strct->hsv->value = 0;
 }
 
-int 					do_change(t_struct *strct)
+int				do_change(t_struct *strct)
 {
 	clear_pixels(strct->pict);
 	move(strct);
@@ -96,8 +96,8 @@ int 					do_change(t_struct *strct)
 	hsv_overflow(strct);
 	hsv_overflow_alt(strct);
 	mlx_put_image_to_window(strct->win->mlx,
-		strct->win->window, strct->pict->img, 0, 0);
+			strct->win->window, strct->pict->img, 0, 0);
 	mlx_put_image_to_window(strct->win->mlx,
-		strct->win->window, strct->menu->img, 0, 0);
+			strct->win->window, strct->menu->img, 0, 0);
 	return (0);
 }

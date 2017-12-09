@@ -6,14 +6,14 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:14:37 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 18:56:47 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 20:03:50 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 
-static	void 	mouse_pos(int button, int x, int y, t_struct *strct)
+static	void	mouse_pos(int button, int x, int y, t_struct *strct)
 {
 	if ((x > 39 && y > 41) && (x < 127 && y < 63) && button == 1)
 	{
@@ -31,7 +31,7 @@ static	void 	mouse_pos(int button, int x, int y, t_struct *strct)
 		strct->choix->diag = ((strct->choix->diag) == 0 ? 1 : 0);
 }
 
-static	void 	mouse_moove(int button, int x, int y, t_struct *strct)
+static	void	mouse_moove(int button, int x, int y, t_struct *strct)
 {
 	if ((x > 165 && y > 9) && (x < 228 && y < 92) && button == 1)
 		strct->pos_win->starty -= 10;
@@ -43,7 +43,7 @@ static	void 	mouse_moove(int button, int x, int y, t_struct *strct)
 		strct->pos_win->startx -= 10;
 }
 
-static	void 	mouse_zoom(int button, int x, int y, t_struct *strct)
+static	void	mouse_zoom(int button, int x, int y, t_struct *strct)
 {
 	if ((((x > 73 && y > 334) && (x < 117 && y < 348) && button == 1)
 				|| button == 4)
@@ -54,7 +54,7 @@ static	void 	mouse_zoom(int button, int x, int y, t_struct *strct)
 		strct->pos_win->pas += 0.5;
 }
 
-static	void 	mouse_alt(int button, int x, int y, t_struct *strct)
+static	void	mouse_alt(int button, int x, int y, t_struct *strct)
 {
 	if ((x > 74 && y > 416) && (x < 116 && y < 428) && button == 1)
 		strct->pos_win->mult_alt -= 0.5;
@@ -72,7 +72,7 @@ static	void 	mouse_alt(int button, int x, int y, t_struct *strct)
 		strct->hsv->value_alt -= 0.05;
 }
 
-static	void 	mouse_base(int button, int x, int y, t_struct *strct)
+static	void	mouse_base(int button, int x, int y, t_struct *strct)
 {
 	if ((x >= 19 && y >= 729) && (x <= 379 && y <= 779) && button == 1)
 		strct->hsv->hue = x - 20;
@@ -86,25 +86,29 @@ static	void 	mouse_base(int button, int x, int y, t_struct *strct)
 		strct->hsv->value -= 0.05;
 }
 
-static	void 	mouse_deg_color(int button, int x, int y, t_struct *strct)
+static	void	mouse_deg_color(int button, int x, int y, t_struct *strct)
 {
 	if ((x > 50 && y > 1002) && (x < 151 && y < 1028) && button == 1)
 	{
-		strct->choix->col->color_x = ((strct->choix->col->color_x) == 0 ? 1 : 0);
+		strct->choix->col->color_x =
+			((strct->choix->col->color_x) == 0 ? 1 : 0);
 		strct->choix->col->color_y = 0;
 	}
 	if ((x > 54 && y > 1101) && (x < 150 && y < 1131) && button == 1)
 	{
-		strct->choix->col->color_y = ((strct->choix->col->color_y) == 0 ? 1 : 0);
+		strct->choix->col->color_y =
+			((strct->choix->col->color_y) == 0 ? 1 : 0);
 		strct->choix->col->color_x = 0;
 	}
 	if ((x > 189 && y > 1104) && (x < 365 && y < 1130) && button == 1)
-		strct->choix->col->color_uni = ((strct->choix->col->color_uni) == 0 ? 1 : 0);
+		strct->choix->col->color_uni =
+			((strct->choix->col->color_uni) == 0 ? 1 : 0);
 	if ((x > 201 && y > 1001) && (x < 352 && y < 1024) && button == 1)
-		strct->choix->col->color_uni_alt = ((strct->choix->col->color_uni_alt) == 0 ? 1 : 0);
+		strct->choix->col->color_uni_alt =
+			((strct->choix->col->color_uni_alt) == 0 ? 1 : 0);
 }
 
-int		fct_mouse(int button, int x, int y, t_struct *strct)
+int				fct_mouse(int button, int x, int y, t_struct *strct)
 {
 	mouse_pos(button, x, y, strct);
 	mouse_moove(button, x, y, strct);
@@ -115,7 +119,7 @@ int		fct_mouse(int button, int x, int y, t_struct *strct)
 	return (0);
 }
 
-int		fct_key(int keycode, t_struct *strct)
+int				fct_key(int keycode, t_struct *strct)
 {
 	if (keycode == 53)
 		free_strct_exit(strct);
@@ -124,11 +128,11 @@ int		fct_key(int keycode, t_struct *strct)
 	return (0);
 }
 
-int 	key_off(int keycode, t_struct *strct)
+int				key_off(int keycode, t_struct *strct)
 {
 	(void)strct;
 	if (keycode && keycode != 35 && keycode != 31 && keycode != 6
-		&& keycode != 34 && keycode != 7 && keycode != 8)
+			&& keycode != 34 && keycode != 7 && keycode != 8)
 		strct->pos_win->key[keycode] = 0;
 	return (0);
 }

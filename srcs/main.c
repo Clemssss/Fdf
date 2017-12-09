@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 19:13:01 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 20:13:11 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 static	int		nb_digit(char *line)
 {
-	int	nb;
-	int	i;
+	int		nb;
+	int		i;
 
 	i = 0;
 	nb = 0;
@@ -36,7 +36,7 @@ static	int		nb_digit(char *line)
 	return (nb);
 }
 
-static	int	*concat_line(char *line)
+static	int		*concat_line(char *line)
 {
 	int		i;
 	int		j;
@@ -49,9 +49,10 @@ static	int	*concat_line(char *line)
 		return (NULL);
 	while (line[i])
 	{
-		if (line[i] != '-' && line[i] != '+' && line[i] != '\n' && line[i] != ' '
-				&& line[i] != '\t' && !ft_isdigit(line[i]))
-				return (NULL);
+		if (line[i] != '-' && line[i] != '+' && line[i] != '\n'
+				&& line[i] != ' ' && line[i] != '\t'
+				&& !ft_isdigit(line[i]))
+			return (NULL);
 		if (ft_isdigit(line[i]) || line[i] == '-' || line[i] == '+')
 		{
 			tab[j++] = ft_atoi(&line[i]) + '0';
@@ -65,7 +66,7 @@ static	int	*concat_line(char *line)
 	return (tab);
 }
 
-static	int	**read_and_fill(t_tab *strct, char **av)
+static	int		**read_and_fill(t_tab *strct, char **av)
 {
 	int		fd;
 	int		ret;
@@ -88,8 +89,10 @@ static	int	**read_and_fill(t_tab *strct, char **av)
 		il = ft_intlen(strct->len_coor);
 		if ((!(tmp = (int**)ft_memrealloc((int**)tmp,
 					tl * sizeof(*tmp), tl * sizeof(*tmp) + 1)))
-				|| (!(strct->len_coor = (int*)ft_memrealloc((int*)strct->len_coor,
-						il * sizeof(*strct->len_coor), il * sizeof(*strct->len_coor) + 1)))
+				|| (!(strct->len_coor =
+						(int*)ft_memrealloc((int*)strct->len_coor,
+							il * sizeof(*strct->len_coor),
+							il * sizeof(*strct->len_coor) + 1)))
 				|| (!(tmp[i] = concat_line(line))))
 			return (NULL);
 		strct->len_coor[i] = ft_intlen(tmp[i]);
@@ -103,7 +106,7 @@ static	int	**read_and_fill(t_tab *strct, char **av)
 	return (tmp);
 }
 
-static	void 	init_strct(t_struct *strct)
+static	void	init_strct(t_struct *strct)
 {
 	float	ratio;
 
@@ -126,13 +129,13 @@ static	void 	init_strct(t_struct *strct)
 	strct->choix->col->color_uni_alt = 0;
 }
 
-static	void 	ft_usage(void)
+static	void	ft_usage(void)
 {
 	ft_putstr("Usage : ./fdf file\n");
 	exit(0);
 }
 
-int						main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_struct	*strct;
 
@@ -145,7 +148,8 @@ int						main(int ac, char **av)
 			|| (!(strct->pos_iso = (t_pos_iso *)ft_memalloc(sizeof(t_pos_iso))))
 			|| (!(strct->pos_win = (t_pos_win *)ft_memalloc(sizeof(t_pos_win))))
 			|| (!(strct->choix = (t_choix *)ft_memalloc(sizeof(t_choix))))
-			|| (!(strct->choix->col = (t_mycolor *)ft_memalloc(sizeof(t_mycolor))))
+			|| (!(strct->choix->col =
+					(t_mycolor *)ft_memalloc(sizeof(t_mycolor))))
 			|| (!(strct->tab = (t_tab *)ft_memalloc(sizeof(t_tab))))
 			|| (!(strct->orig = (t_orig *)ft_memalloc(sizeof(t_orig))))
 			|| (!(strct->hsv = (t_hsv *)ft_memalloc(sizeof(t_hsv))))

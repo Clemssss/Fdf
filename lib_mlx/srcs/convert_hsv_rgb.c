@@ -6,13 +6,13 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 19:21:19 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 13:00:39 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 19:53:28 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlx.h"
 
-static	void 	h_0_to_3(double h, double v, t_color *color)
+static	void	h_0_to_3(double h, double v, t_color *color)
 {
 	if (h < 1)
 	{
@@ -34,7 +34,7 @@ static	void 	h_0_to_3(double h, double v, t_color *color)
 	}
 }
 
-static	void 	h_3_to_6(double h, double v, t_color *color)
+static	void	h_3_to_6(double h, double v, t_color *color)
 {
 	if (h >= 3 && h < 4)
 	{
@@ -56,9 +56,9 @@ static	void 	h_3_to_6(double h, double v, t_color *color)
 	}
 }
 
-void 				conv_hsv_rgb(t_pict *pict, float h, float s, float v)
+void			conv_hsv_rgb(t_pict *pict, float h, float s, float v)
 {
-	t_color	color;
+	t_color		color;
 
 	h = h * 3.14 / 180;
 	color.i = (int)h;
