@@ -6,68 +6,77 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 19:21:19 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 16:40:43 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 13:00:39 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlx.h"
 
-static	void 	h_180_to_360(t_color *color, float h)
+static	void 	h_0_to_3(double h, double v, t_color *color)
 {
-	if (h >= 180 && h < 240)
+	if (h < 1)
 	{
-		color->red = 0;
-		color->green = color->x;
-		color->blue = color->c;
+		color->red = v;
+		color->green = color->up;
+		color->blue = color->min;
 	}
-	else if (h >= 240 && h < 300)
+	else if (h >= 1 && h < 2)
 	{
-		color->red = color->x;
-		color->green = 0;
-		color->blue = color->c;
+		color->red = color->down;
+		color->green = v;
+		color->blue = color->min;
 	}
-	else if (h >= 300 && h < 360)
+	else if (h >= 2 && h < 3)
 	{
-		color->red = color->c;
-		color->green = 0;
-		color->blue = color->x;
+		color->red = color->min;
+		color->green = v;
+		color->blue = color->up;
 	}
 }
 
-static	void 	h_0_to_180(t_color *color, float h)
+static	void 	h_3_to_6(double h, double v, t_color *color)
 {
-	if (h >= 0 && h < 60)
+	if (h >= 3 && h < 4)
 	{
-		color->red = color->c;
-		color->green = color->x;
-		color->blue = 0;
+		color->red = color->min;
+		color->green = color->down;
+		color->blue = v;
 	}
-	else if (h >= 60 && h < 120)
+	else if (h >= 4 && h < 5)
 	{
-		color->red = color->x;
-		color->green = color->c;
-		color->blue = 0;
+		color->red = color->up;
+		color->green = color->min;
+		color->blue = v;
 	}
-	else if (h >= 120 && h < 180)
+	else if (h >= 5 && h < 6)
 	{
-		color->red = 0;
-		color->green = color->c;
-		color->blue = color->x;
+		color->red = v;
+		color->green = color->min;
+		color->blue = color->down;
 	}
 }
 
-void					conv_hsv_rgb(t_pict *pict, float h, float s, float v)
+void 				conv_hsv_rgb(t_pict *pict, float h, float s, float v)
 {
-	t_color		color;
+	t_color	color;
 
-	color.c = v * s;
-	color.x = color.c * (1 - ABS(((int)h / 60) % 2 - 1));
-	color.m = v - color.c;
-	if (h >= 0 && h < 180)
-		h_0_to_180(&color, h);
-	else if (h >= 180 && h < 360)
-		h_180_to_360(&color, h);
-	pict->r = (color.red + color.m) * 255;
-	pict->g = (color.green + color.m) * 255;
-	pict->b = (color.blue + color.m) * 255;
+	h = h * 3.14 / 180;
+	color.i = (int)h;
+	color.f = h - color.i;
+	color.min = v * (1 - s);
+	color.down = v * (1 - color.f * s);
+	color.up = v * (1 - (1 - color.f) * s);
+	if (h >= 0 && h < 3)
+		h_0_to_3(h, v, &color);
+	else if (h >= 3 && h < 6)
+		h_3_to_6(h, v, &color);
+	else if (h > 6)
+	{
+		color.red = v;
+		color.green = color.min;
+		color.blue = color.up;
+	}
+	pict->r = color.red * 255;
+	pict->g = color.green * 255;
+	pict->b = color.blue * 255;
 }

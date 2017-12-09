@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:36:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:24:28 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 19:04:02 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define ABS(Value) ((Value) < 0 ? - (Value) : (Value))
 # define WIDTH 1800
 # define HEIGHT 1200
+# define NAME "Fdf"
+# define FILE_MENU "./pictures/menu.xpm"
 
 # include <stdio.h>
 # include <unistd.h>
@@ -23,12 +25,14 @@
 
 typedef struct  s_color
 {
-  float         c;
-  float         x;
-  float         m;
-  float         red;
-  float         green;
-  float         blue;
+  double        red;
+  double        green;
+  double        blue;
+  double        i;
+  double        f;
+  double        min;
+  double        up;
+  double        down;
 }               t_color;
 
 typedef struct  s_hsv
@@ -36,6 +40,9 @@ typedef struct  s_hsv
   float         hue;
   float         saturation;
   float         value;
+  float         hue_alt;
+  float         saturation_alt;
+  float         value_alt;
 }               t_hsv;
 
 typedef struct  s_window

@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 17:37:27 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 19:08:06 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,26 @@ static	void 	change_alt(t_struct *strct)
 		strct->pos_win->mult_alt += 0.7;
 	if (strct->pos_win->key[78])
 		strct->pos_win->mult_alt -= 0.7;
+	if (strct->pos_win->key[30])
+		strct->pos_win->pas += 1;
+	if (strct->pos_win->key[33])
+		strct->pos_win->pas -= 1;
 }
 
-static	void 	color_change(t_struct *strct)
+static	void 	hsv_overflow_alt(t_struct *strct)
 {
-	if (strct->pos_win->key[17])
-		strct->hsv->hue += 5;
-	if (strct->pos_win->key[5])
-		strct->hsv->hue -= 5;
-	if (strct->pos_win->key[16])
-		strct->hsv->saturation += 0.05;
-	if (strct->pos_win->key[4])
-		strct->hsv->saturation -= 0.05;
-	if (strct->pos_win->key[32])
-		strct->hsv->value += 0.05;
-	if (strct->pos_win->key[38])
-		strct->hsv->value -= 0.05;
+	if (strct->hsv->hue_alt >= 360)
+		strct->hsv->hue_alt = 0;
+	if (strct->hsv->hue_alt < 0)
+		strct->hsv->hue_alt = 360;
+	if (strct->hsv->saturation_alt < 0)
+		strct->hsv->saturation_alt = 1;
+	if (strct->hsv->saturation_alt > 1.1)
+		strct->hsv->saturation_alt = 0;
+	if (strct->hsv->value_alt < 0)
+		strct->hsv->value_alt = 1;
+	if (strct->hsv->value_alt > 1.1)
+		strct->hsv->value_alt = 0;
 }
 
 static	void 	hsv_overflow(t_struct *strct)
@@ -72,14 +76,14 @@ static	void 	hsv_overflow(t_struct *strct)
 		strct->hsv->hue = 0;
 	if (strct->hsv->hue < 0)
 		strct->hsv->hue = 360;
-	/*if (strct->hsv->saturation < 0)
+	if (strct->hsv->saturation < 0)
 		strct->hsv->saturation = 1;
 	if (strct->hsv->saturation > 1.1)
 		strct->hsv->saturation = 0;
 	if (strct->hsv->value < 0)
 		strct->hsv->value = 1;
 	if (strct->hsv->value > 1.1)
-		strct->hsv->value = 0;*/
+		strct->hsv->value = 0;
 }
 
 int 					do_change(t_struct *strct)
@@ -88,12 +92,12 @@ int 					do_change(t_struct *strct)
 	move(strct);
 	change_alt(strct);
 	rotate(strct);
-	color_change(strct);
 	ft_put_pxl(strct);
 	hsv_overflow(strct);
+	hsv_overflow_alt(strct);
 	mlx_put_image_to_window(strct->win->mlx,
 		strct->win->window, strct->pict->img, 0, 0);
 	mlx_put_image_to_window(strct->win->mlx,
-		strct->win->window, strct->menu->img, 0, -5);
+		strct->win->window, strct->menu->img, 0, 0);
 	return (0);
 }

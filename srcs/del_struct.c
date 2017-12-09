@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 17:16:28 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 12:24:13 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 14:17:55 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_strct_exit(t_struct *strct)
 	free(strct->coor);
 	free(strct->pos_iso);
 	free(strct->pos_win);
+	free(strct->choix->col);
 	free(strct->choix);
 	free(strct->tab);
 	free(strct->orig);

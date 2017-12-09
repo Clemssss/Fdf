@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 17:10:39 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 18:51:53 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct  s_coor
 {
   int           alt;
   int           alt2;
-  unsigned  int color;
   int           imin;
   int           jmin;
   int           imax;
@@ -70,18 +69,22 @@ typedef struct  s_menu
   int           y;
 }               t_menu;
 
+typedef struct  s_mycolor
+{
+  int           color_x;
+  int           color_y;
+  int           color_uni;
+  int           color_uni_alt;
+  int           color_uni_reset;
+}               t_mycolor;
+
 typedef struct  s_choix
 {
   int           draw;
   int           diag;
   int           iso;
   int           para;
-  int           color_x;
-  int           color_y;
-  int           color_alt;
-  int           t;
-  int           reset;
-  int           c;
+  t_mycolor     *col;
 }               t_choix;
 
 typedef struct  s_orig
@@ -106,7 +109,7 @@ typedef struct  s_struct
 }               t_struct;
 
 /*  color.c */
-void            color(t_struct *strct, int x, int y, int x2, int y2);
+void            color(t_struct *strct, int x, int y);
 
 /*  del_struct.c  */
 void			      free_strct_exit(t_struct *strct);

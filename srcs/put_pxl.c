@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/08 17:12:07 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/09 14:56:58 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,18 @@ static	void 	remp_strct(t_struct *strct, int **tab, int x, int y)
 	strct->coor->jmax = y;
 }
 
-static	void 	check_x_y(t_struct *strct, int x, int y, int c)
+static	void 	check_x_y_pos(t_struct *strct, int x, int y, int c)
 {
 	if (c == 0)
-	{
 		remp_strct(strct, strct->tab->coor, x, y + 1);
-		color(strct, x, y, x, y + 1);
-	}
 	else if (c == 1)
-	{
 		remp_strct(strct, strct->tab->coor, x + 1, y);
-		color(strct, x, y, x + 1, y);
-	}
 	else if (c == 2)
-	{
 		remp_strct(strct, strct->tab->coor, x + 1, y + 1);
-		color(strct, x, y, x + 1, y + 1);
-	}
-	strct->choix->c = 1;
+	if (strct->choix->iso == 1)
+		pos_iso(strct);
+	else if (strct->choix->para == 1)
+		pos_para(strct);
 }
 
 static	void 	make(t_struct *strct, int x, int y, int c)
@@ -46,16 +40,18 @@ static	void 	make(t_struct *strct, int x, int y, int c)
 	strct->coor->alt = (strct->tab->coor[x][y] - '0') * strct->pos_win->mult_alt;
 	strct->coor->imin = x;
 	strct->coor->jmin = y;
-	check_x_y(strct, x, y, c);
-	if (strct->choix->iso == 1)
-		pos_iso(strct);
-	else if (strct->choix->para == 1)
-		pos_para(strct);
+	check_x_y_pos(strct, x, y, c);
+	color(strct, x, y);
+	strct->choix->col->color_uni_reset = 1;
 	rotation_z(strct);
 	rotation_x(strct);
 	rotation_y(strct);
-	conv_hsv_rgb(strct->pict, strct->hsv->hue,
-		strct->hsv->saturation, strct->hsv->value);
+	if (strct->coor->alt || strct->coor->alt2)
+		conv_hsv_rgb(strct->pict, strct->hsv->hue_alt,
+			strct->hsv->saturation_alt, strct->hsv->value_alt);
+	else
+		conv_hsv_rgb(strct->pict, strct->hsv->hue,
+			strct->hsv->saturation, strct->hsv->value);
 	if (strct->choix->para || strct->choix->iso)
 		draw_line(strct->pict, strct->pos_iso->xmin, strct->pos_iso->ymin,
 			strct->pos_iso->xmax, strct->pos_iso->ymax, strct->choix->draw);
@@ -85,8 +81,8 @@ int		ft_put_pxl(t_struct *strct)
 	int		y;
 
 	x = 0;
+	strct->choix->col->color_uni_reset = 0;
 	center(strct);
-	strct->choix->c = 0;
 	while (strct->tab->coor[x])
 	{
 		y = 0;
