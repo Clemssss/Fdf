@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 13:27:33 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 13:32:30 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ static	void	make(t_struct *strct, int x, int y, int c)
 				strct->hsv->saturation, strct->hsv->value);
 	if ((strct->choix->para || strct->choix->iso) && strct->choix->draw == 0)
 		draw_line(strct->pict, strct->pos_iso);
-	else if (strct->choix->para || strct->choix->iso)
+	else if ((strct->choix->para || strct->choix->iso)
+			&& (strct->pos_iso->xmin >= 0 && strct->pos_iso->xmin < WIDTH)
+			&& (strct->pos_iso->ymin >= 1 && strct->pos_iso->ymin < HEIGHT))
 		draw_pixel(strct->pict, strct->pos_iso->xmin, strct->pos_iso->ymin);
 }
 
