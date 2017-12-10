@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 13:32:30 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 14:19:25 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	void	make(t_struct *strct, int x, int y, int c)
 	rotation_z(strct);
 	rotation_x(strct);
 	rotation_y(strct);
-	if (strct->coor->alt || strct->coor->alt2)
+	if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
 		conv_hsv_rgb(strct->pict, strct->hsv->hue_alt,
 				strct->hsv->saturation_alt, strct->hsv->value_alt);
 	else

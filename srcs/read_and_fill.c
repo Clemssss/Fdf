@@ -6,7 +6,7 @@
 /*   By: clegirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 13:01:11 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 13:25:40 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 14:27:14 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,8 @@ int			**read_and_fill(t_tab *strct, char **av)
 	i = 0;
 	strct->tl = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
-	{
 		if (!(tmp = stock_map(strct, tmp, line, &i)))
 			return (NULL);
-	}
 	if (ret == -1)
 		return (NULL);
 	tmp[i] = NULL;

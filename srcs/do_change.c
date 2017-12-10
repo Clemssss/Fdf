@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:16:00 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 12:40:09 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 14:23:03 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static	void	rotate(t_struct *strct)
 static	void	change_alt(t_struct *strct)
 {
 	if (strct->pos_win->key[69])
-		strct->pos_win->mult_alt += 0.7;
+		strct->pos_win->mult_alt += 0.2;
 	if (strct->pos_win->key[78])
-		strct->pos_win->mult_alt -= 0.7;
+		strct->pos_win->mult_alt -= 0.2;
 	if (strct->pos_win->key[30])
 		strct->pos_win->pas += 1;
 	if (strct->pos_win->key[33])
