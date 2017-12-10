@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:36:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 19:54:43 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 12:25:56 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ typedef	struct	s_line
 	int			y_incr;
 }				t_line;
 
+typedef	struct	s_pos_iso
+{
+	int			xmin;
+	int			ymin;
+	int			xmax;
+	int			ymax;
+}				t_pos_iso;
+
 /*
 **	clear_pixels.c
 */
@@ -95,7 +103,6 @@ void			draw_pixel(t_pict *pict, int x, int y);
 /*
 **	draw_line.c
 */
-void			draw_line(t_pict *pict, int xmin, int ymin,
-		int xmax, int ymax, int c);
+void			draw_line(t_pict *pict, t_pos_iso *pos_iso);
 
 #endif

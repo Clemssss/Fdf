@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 19:44:06 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 13:28:14 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,6 @@ typedef struct	s_coor
 	int			imax;
 	int			jmax;
 }				t_coor;
-
-typedef struct	s_pos_iso
-{
-	int			xmin;
-	int			ymin;
-	int			xmax;
-	int			ymax;
-}				t_pos_iso;
 
 typedef struct	s_pos_win
 {
@@ -94,6 +86,17 @@ typedef struct	s_orig
 	int			z_or;
 }				t_orig;
 
+typedef	struct	s_rotate
+{
+	float		radian;
+	int			x;
+	int			y;
+	int			z;
+	int			x2;
+	int			y2;
+	int			z2;
+}				t_rotate;
+
 typedef struct	s_struct
 {
 	t_window	*win;
@@ -107,6 +110,11 @@ typedef struct	s_struct
 	t_hsv		*hsv;
 	t_menu		*menu;
 }				t_struct;
+
+/*
+**	center.c
+*/
+void			center(t_struct *strct);
 
 /*
 **	color.c
@@ -124,17 +132,27 @@ void			free_strct_exit(t_struct *strct);
 int				do_change(t_struct *strct);
 
 /*
-**	events.c
+**	events_key.c
 */
-int				choice(int keycode, t_struct *strct);
-int				fct_key(int keycode, t_struct *strct);
-int				fct_mouse(int button, int x, int y, t_struct *strct);
 int				key_off(int keycode, t_struct *strct);
+int				fct_key(int keycode, t_struct *strct);
+
+/*
+**	events_mouse.c
+*/
+int				fct_mouse(int button, int x, int y, t_struct *strct);
 
 /*
 **	loop_img.c
 */
 int				loop_img(t_struct *strct);
+
+/*
+**	mouse_pos_move_zoom.c
+*/
+void			mouse_pos(int button, int x, int y, t_struct *strct);
+void			mouse_move(int button, int x, int y, t_struct *strct);
+void			mouse_zoom(int button, int x, int y, t_struct *strct);
 
 /*
 **	pos.c
@@ -146,6 +164,11 @@ void			pos_para(t_struct *strct);
 **	put_pxl.c
 */
 int				ft_put_pxl(t_struct *strct);
+
+/*
+**	read_and_fill.c
+*/
+int				**read_and_fill(t_tab *strct, char **av);
 
 /*
 **	rotations.c

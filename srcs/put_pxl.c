@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 20:10:31 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 13:27:33 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,10 @@ static	void	make(t_struct *strct, int x, int y, int c)
 	else
 		conv_hsv_rgb(strct->pict, strct->hsv->hue,
 				strct->hsv->saturation, strct->hsv->value);
-	if (strct->choix->para || strct->choix->iso)
-		draw_line(strct->pict, strct->pos_iso->xmin, strct->pos_iso->ymin,
-				strct->pos_iso->xmax, strct->pos_iso->ymax, strct->choix->draw);
-}
-
-static	void	coor_center(t_struct *strct, int x, int y)
-{
-	int		alt;
-
-	alt = (strct->tab->coor[x][y] - '0');
-	strct->orig->x_or = strct->pos_win->startx + x * strct->pos_win->pas
-		+ y * strct->pos_win->pas;
-	strct->orig->y_or = strct->pos_win->starty + x * strct->pos_win->pas
-		- y * strct->pos_win->pas - alt;
-	strct->orig->z_or = alt;
-}
-
-static	void	center(t_struct *strct)
-{
-	coor_center(strct, strct->tab->tl / 2,
-			strct->tab->len_coor[strct->tab->tl / 2] / 2);
+	if ((strct->choix->para || strct->choix->iso) && strct->choix->draw == 0)
+		draw_line(strct->pict, strct->pos_iso);
+	else if (strct->choix->para || strct->choix->iso)
+		draw_pixel(strct->pict, strct->pos_iso->xmin, strct->pos_iso->ymin);
 }
 
 int				ft_put_pxl(t_struct *strct)

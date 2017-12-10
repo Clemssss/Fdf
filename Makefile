@@ -6,21 +6,25 @@
 #    By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/24 16:33:19 by clegirar          #+#    #+#              #
-#    Updated: 2017/12/08 13:30:36 by clegirar         ###   ########.fr        #
+#    Updated: 2017/12/10 12:59:28 by clegirar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fdf
 
-SRCS	=	./srcs/main.c								\
-				./srcs/loop_img.c						\
-				./srcs/del_struct.c					\
-				./srcs/pos.c								\
-				./srcs/put_pxl.c						\
-				./srcs/events.c							\
-				./srcs/do_change.c					\
-				./srcs/rotations.c					\
-				./srcs/color.c
+SRCS	=	./srcs/main.c					\
+			./srcs/loop_img.c				\
+			./srcs/del_struct.c				\
+			./srcs/pos.c					\
+			./srcs/put_pxl.c				\
+			./srcs/events_mouse.c			\
+			./srcs/mouse_pos_move_zoom.c	\
+			./srcs/events_key.c				\
+			./srcs/do_change.c				\
+			./srcs/rotations.c				\
+			./srcs/color.c					\
+			./srcs/center.c					\
+			./srcs/read_and_fill.c
 
 OBJS	=	$(SRCS:.c=.o)
 

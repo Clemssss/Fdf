@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:42:59 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 19:55:01 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 12:26:50 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,14 @@ static	void	draw_y(t_pict *pict, t_line *line)
 	}
 }
 
-void			draw_line(t_pict *pict, int xmin, int ymin,
-		int xmax, int ymax, int c)
+void			draw_line(t_pict *pict, t_pos_iso *pos_iso)
 {
 	t_line		line;
 
-	line.x = xmin;
-	line.y = ymin;
-	line.diff_x = xmax - xmin;
-	line.diff_y = ymax - ymin;
+	line.x = pos_iso->xmin;
+	line.y = pos_iso->ymin;
+	line.diff_x = pos_iso->xmax - pos_iso->xmin;
+	line.diff_y = pos_iso->ymax - pos_iso->ymin;
 	line.x_incr = (line.diff_x > 0) ? 1 : -1;
 	line.y_incr = (line.diff_y > 0) ? 1 : -1;
 	line.diff_x = ABS(line.diff_x);
@@ -74,11 +73,8 @@ void			draw_line(t_pict *pict, int xmin, int ymin,
 	if ((line.x >= 0 && line.x < WIDTH)
 			&& (line.y >= 1 && line.y < HEIGHT))
 		draw_pixel(pict, line.x, line.y);
-	if (c == 0)
-	{
-		if (line.diff_x > line.diff_y)
-			draw_x(pict, &line);
-		else
-			draw_y(pict, &line);
-	}
+	if (line.diff_x > line.diff_y)
+		draw_x(pict, &line);
+	else
+		draw_y(pict, &line);
 }

@@ -6,53 +6,12 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:14:37 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/09 20:03:50 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 12:57:42 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
-
-static	void	mouse_pos(int button, int x, int y, t_struct *strct)
-{
-	if ((x > 39 && y > 41) && (x < 127 && y < 63) && button == 1)
-	{
-		strct->choix->iso = ((strct->choix->iso) == 0 ? 1 : 0);
-		strct->choix->para = 0;
-	}
-	if ((x > 44 && y > 225) && (x < 129 && y < 247) && button == 1)
-	{
-		strct->choix->para = ((strct->choix->para) == 0 ? 1 : 0);
-		strct->choix->iso = 0;
-	}
-	if ((x > 266 && y > 41) && (x < 367 && y < 64) && button == 1)
-		strct->choix->draw = ((strct->choix->draw) == 0 ? 1 : 0);
-	if ((x > 269 && y > 224) && (x < 352 && y < 253) && button == 1)
-		strct->choix->diag = ((strct->choix->diag) == 0 ? 1 : 0);
-}
-
-static	void	mouse_moove(int button, int x, int y, t_struct *strct)
-{
-	if ((x > 165 && y > 9) && (x < 228 && y < 92) && button == 1)
-		strct->pos_win->starty -= 10;
-	if ((x > 257 && y > 114) && (x < 341 && y < 171) && button == 1)
-		strct->pos_win->startx += 10;
-	if ((x > 171 && y > 192) && (x < 233 && y < 271) && button == 1)
-		strct->pos_win->starty += 10;
-	if ((x > 47 && y > 109) && (x < 132 && y < 171) && button == 1)
-		strct->pos_win->startx -= 10;
-}
-
-static	void	mouse_zoom(int button, int x, int y, t_struct *strct)
-{
-	if ((((x > 73 && y > 334) && (x < 117 && y < 348) && button == 1)
-				|| button == 4)
-			&& strct->pos_win->pas > 0.000001)
-		strct->pos_win->pas -= 0.5;
-	if (((x > 280 && y > 325) && (x < 315 && y < 357) && button == 1)
-			|| button == 5)
-		strct->pos_win->pas += 0.5;
-}
 
 static	void	mouse_alt(int button, int x, int y, t_struct *strct)
 {
@@ -111,28 +70,10 @@ static	void	mouse_deg_color(int button, int x, int y, t_struct *strct)
 int				fct_mouse(int button, int x, int y, t_struct *strct)
 {
 	mouse_pos(button, x, y, strct);
-	mouse_moove(button, x, y, strct);
+	mouse_move(button, x, y, strct);
 	mouse_zoom(button, x, y, strct);
 	mouse_alt(button, x, y, strct);
 	mouse_base(button, x, y, strct);
 	mouse_deg_color(button, x, y, strct);
-	return (0);
-}
-
-int				fct_key(int keycode, t_struct *strct)
-{
-	if (keycode == 53)
-		free_strct_exit(strct);
-	if (keycode)
-		strct->pos_win->key[keycode] = 1;
-	return (0);
-}
-
-int				key_off(int keycode, t_struct *strct)
-{
-	(void)strct;
-	if (keycode && keycode != 35 && keycode != 31 && keycode != 6
-			&& keycode != 34 && keycode != 7 && keycode != 8)
-		strct->pos_win->key[keycode] = 0;
 	return (0);
 }
