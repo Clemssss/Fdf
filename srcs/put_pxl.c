@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 11:13:57 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 14:19:25 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/10 15:29:39 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static	void	make(t_struct *strct, int x, int y, int c)
 	check_x_y_pos(strct, x, y, c);
 	color(strct, x, y);
 	strct->choix->col->color_uni_reset = 1;
-	rotation_z(strct);
-	rotation_x(strct);
-	rotation_y(strct);
 	if (strct->coor->alt > 0 || strct->coor->alt2 > 0)
 		conv_hsv_rgb(strct->pict, strct->hsv->hue_alt,
 				strct->hsv->saturation_alt, strct->hsv->value_alt);
 	else
 		conv_hsv_rgb(strct->pict, strct->hsv->hue,
 				strct->hsv->saturation, strct->hsv->value);
+	rotation_z(strct);
+	rotation_x(strct);
+	rotation_y(strct);
 	if ((strct->choix->para || strct->choix->iso) && strct->choix->draw == 0)
 		draw_line(strct->pict, strct->pos_iso);
 	else if ((strct->choix->para || strct->choix->iso)
