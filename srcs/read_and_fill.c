@@ -6,7 +6,7 @@
 /*   By: clegirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 13:01:11 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 14:27:14 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/12 12:27:09 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static	int	**stock_map(t_tab *strct, int **tmp, char *line, int *i)
 			|| (!(tmp[*i] = concat_line(line))))
 		return (NULL);
 	strct->len_coor[*i] = ft_intlen(tmp[*i]);
+	if (strct->len_coor[*i] > strct->max_len_y)
+		strct->max_len_y = strct->len_coor[*i];
 	*i += 1;
 	strct->tl += 1;
 	ft_strdel(&line);
@@ -101,6 +103,7 @@ int			**read_and_fill(t_tab *strct, char **av)
 	ret = 0;
 	i = 0;
 	strct->tl = 0;
+	strct->max_len_y = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
 		if (!(tmp = stock_map(strct, tmp, line, &i)))
 			return (NULL);

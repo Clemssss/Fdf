@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 15:52:55 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 14:18:37 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/12 12:25:58 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ static	void	init_strct(t_struct *strct)
 
 	strct->pos_win->startx = 550 + WIDTH_MENU;
 	strct->pos_win->starty = 550;
-	ratio = 10 / (float)strct->tab->tl;
+	if (strct->tab->tl > strct->tab->max_len_y)
+		ratio = 10 / (float)strct->tab->tl;
+	else
+		ratio = 10 / (float)strct->tab->max_len_y;
 	strct->pos_win->pas = ratio * 43;
-	strct->pos_win->mult_alt = 0.1;
+	strct->pos_win->mult_alt = 1;
 	strct->hsv->hue = 30;
 	strct->hsv->saturation = 1;
 	strct->hsv->value = 1;

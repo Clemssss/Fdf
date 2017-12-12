@@ -6,7 +6,7 @@
 /*   By: clegirar <clegirar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 20:25:47 by clegirar          #+#    #+#             */
-/*   Updated: 2017/12/10 13:28:14 by clegirar         ###   ########.fr       */
+/*   Updated: 2017/12/12 12:41:06 by clegirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_tab
 	int			**coor;
 	int			*len_coor;
 	int			tl;
+	int			max_len_y;
 }				t_tab;
 
 typedef struct	s_coor
